@@ -1,0 +1,14 @@
+form(ng-submit="changePost()"
+ng-show="isLoggedIn()"
+style="margin-top:30px;"
+)
+    h3 Change post
+    div(class="form-group")
+        input(type="text", class="form-control", ng-model="post.title")
+        br
+        img(class="img-responsive" ng-src="{{post.image}}" alt="{{post.image}}" style="margin:10px;")
+        input(type="text", class="form-control", ng-model="post.image")
+    div(class="form-group")
+        text-angular(ng-model="post.text")
+    button(type="submit", ng-click="changePost", class="btn btn-primary")
+        |Post

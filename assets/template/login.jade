@@ -1,0 +1,23 @@
+div(class="page-header")
+    h1 EduJetPlayer
+div(ng-show="error", class="alert alert-danger row")
+    span {{ error.message }}
+form(
+    ng-submit="logIn(user)"
+    style="margin-top:30px;")
+    h3 Log In
+    div(class="form-group")
+        input(type="text"
+        class="form-control"
+        placeholder="Username"
+        ng-model="user.username"
+        )
+    div(class="form-group")
+        input(
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        ng-model="user.password"
+        )
+    button(type="submit", class="btn btn-primary")
+        | Log In

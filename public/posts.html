@@ -1,0 +1,11 @@
+
+<div>
+  <h3>{{post.title}} by {{post.author}}</h3>
+  <div style="display:inline; position: absolute;right: 0;margin-right:10px;"><span ng-click="incrementPostUpvotes(post)" class="glyphicon glyphicon-thumbs-up"></span><span class="badge">{{post.upvotes}}</span></div>
+  <div style="margin-left:20px;" ng-bind-html="post.text"></div><img src="{{post.image}}" alt="{{post.image}}" style="margin:10px;" class="img-responsive"/>
+  <div ng-show="currentUser()"><span style="margin-left:10px;" class="label label-pill label-info"><a href="#/change/posts/{{post._id}}" style="color: white;">Change</a></span></div>
+</div>
+<hr/>
+<div ng-hide="isLoggedIn()">
+  <h3>You need to<a href="/#/login" style="margin:10px;">Log In</a>or<a href="/#/register" style="margin:10px;">Register</a>before you can add a post.</h3>
+</div>

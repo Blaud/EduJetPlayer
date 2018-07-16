@@ -1,0 +1,21 @@
+
+<div class="row"><img style="margin-right:20px;" align="left" src="{{user.image}}" alt="{{user.image}}" width="64" height="64" class="img-rounded"/>
+  <h1>{{ user.name }}</h1>
+  <form ng-submit="change(user)" style="margin-top:30px;">
+    <h3>url of avatar</h3>
+    <div class="form-group">
+      <input type="text" placeholder="Avatar" ng-model="user.image" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">drop users db</button>
+  </form>
+  <form ng-submit="download()" style="margin-top:30px;">
+    <button type="submit" class="btn btn-primary">download Anki</button>
+  </form>
+  <div style="margin-top:30pt;" class="input-group">
+    <label class="input-group-btn"><span class="btn btn-primary">Импорт прогресса Anki
+        <input id="ankiProgress" type="file" accept="/.apkg" ng-model="myProgress" custom-on-change="changedProgress" style="display: none;"/></span></label>
+  </div>
+</div>
+<hr/><br/>
+<h2>Сохраненные слова:</h2>
+<div ng-repeat="post in parting | orderBy:'knowledge'" style="display: inline-block;"><span ng-class="{'color-red': post.knowledge === 1, 'color-yellow': post.knowledge === 2, 'color-green': post.knowledge === 3}" class="badge">{{post.word}} : {{post.translate}}</span></div>

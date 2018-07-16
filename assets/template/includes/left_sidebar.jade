@@ -1,0 +1,38 @@
+.col-md-2
+    .sidebar.affix(style='height:100%; min-height:100%; width:15%; min-width:15%')
+        .well
+            div(ng-controller="VideoCtrl as controller")
+                ul.nav
+                    form
+                        .form-group
+                            h4 Загрузить видео с компьютера
+                            .input-group
+                                label.input-group-btn
+                                    span.btn.btn-primary
+                                        | Видео
+                                        input#src(type='file', style='display: none;',  accept='video/*', custom-on-change="changedVideo", ng-model="myVideo")
+                                input#uploaded_video.form-control(type='text', ng-model="myVideoInfo")
+                            .input-group
+                                label.input-group-btn
+                                    span.btn.btn-primary
+                                        | Субтитры
+                                        input#sub(type='file', style='display: none;',  accept='/*', ng-model="mySub", custom-on-change="changedSub")
+                                input#uploaded_sub.form-control(type='text', ng-model="mySubInfo", value='{{uploaded_sub}}')
+                            button(class="btn btn-default" ng-click='selectSrc()') Применить
+                        .input-group
+                            label.input-group-btn
+                                span(class="btn btn-default glyphicon glyphicon-search" ng-click='findCaption()')
+                            input#captionsrc.form-control(type='text', ng-model="captionsrc")
+                        label(for='singleSelect')  Выбор субтитров
+                        br
+                        select#singleSelect(class="form-control" name='singleSelect', ng-model='selectedSub', ng-options="x for x in sublist", ng-change='selectCaption()')
+                        br
+                        button(class="btn btn-default" ng-click='addWords()') Добавить все слова в список
+                        span.arrow
+                            | {{ selectedWords }}
+                    //input#captionsrc(ng-model='captionsrc' type='text', class="form-control")
+                        button(class="btn btn-default" ng-click='findCaption()') Найти!
+                        label(for='singleSelect')  Single select with "not selected" option and dynamic option values:
+                            br
+                            select#singleSelect(name='singleSelect', ng-model='selectedSub', ng-options="x for x in sublist", ng-change='selectCaption()')
+                            br

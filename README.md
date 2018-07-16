@@ -1,27 +1,31 @@
-# EduJetJamPlayer
-This unique video player will allow you to learn any language by watching films, anime or serials.
+# EduJetPlayer
+This unique web service will allow you to learn any language by watching films, anime or serials.
 
 ## Getting Started
 
-Main feature of this video player is ability to remember pieces of video by subtitle fragments that you can't understand, and after that program will create list of words and phrases that you should learn in anki format. And if you complete colibration test it also could analyse video and predict phases that you should learn before watch it to understand it.
+Main feature of this service is ability to remember fragments of subtitle that you can't understand, and after that service will create list of words and phrases that you should learn in anki format. And if you complete colibration test it also could analyse video and predict phases that you should learn before watch it to understand it.
 
 
 ## Built With
 
-* [LibGdx]
-* [Overap2d]
-* [gradle]
+* [Node.js]
+* [MongoDB]
+* [Angular]
+* [Video.js]
 
 ## Contributing
 
-Please read [CONTRIBUTING.md]
+
+Coming soon
 
 
-## Authors
+## Developers
 
-* **Nikolay Dvoeglazov** - *Initial work* - [Blaud](https://github.com/Blaud)
+* **Nikolay Dvoeglazov** - *Initial idea, architecture, design, project management* - [Blaud](https://github.com/Blaud)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Anton Chagin** - *Server development, database development* - [AntonChagin](https://github.com/AntonChagin)
+
+* **Nosov Maxim** - *Web player development* - [NosovMaxim]
 
 ## License
 
