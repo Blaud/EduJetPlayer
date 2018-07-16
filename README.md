@@ -25,7 +25,7 @@ Coming soon
 
 * **Anton Chagin** - *Server development, database development* - [AntonChagin](https://github.com/AntonChagin)
 
-* **Nosov Maxim** - *Web player development* - [Makxik](https://github.com/Makxik)
+* **Nosov Maxim** - *Development of: web player, anki-file import, server-side translation module* - [Makxik](https://github.com/Makxik)
 
 ## License
 
