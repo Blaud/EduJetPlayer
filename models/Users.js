@@ -28,7 +28,7 @@ UserSchema.methods.validPassword = function(password) {
 
 UserSchema.methods.addWord = function(_word,_knw,_trans) {
     let banana=this;
-    console.log("slova: "+_word+_knw+_trans);
+    //console.log("slova: "+_word+_knw+_trans);
     this.db.model('User').findOne({
         "words.word": _word,
         "_id":banana._id

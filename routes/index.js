@@ -151,7 +151,7 @@ router.post('/words',  auth, function(req, res, next) {
                                 if (err)console.log('NIEN, find failed');
                                 else {
                                     _result.words.forEach(function (tmp){
-                                        console.log("words: "+tmp);
+                                       // console.log("words: "+tmp);
                                         newarr[tmp.word]=tmp.knowledge;
                                     });
                                     //console.log(newarr);
@@ -298,6 +298,8 @@ router.post('/caption', function(req, res, next) {
             var name = $(this).text();
             var link = $(this).attr('href');
             if(link.includes('highlight=') && !link.includes('#')) {i++;console.log(i+' '+name+' '+link);}});
+        var metric=i/10;
+        console.log('metric' + metric);
         $('a').each(function() {
             var name = $(this).text();
             var link = $(this).attr('href');
@@ -327,15 +329,27 @@ router.post('/caption', function(req, res, next) {
                             console.log('req ' + downloadUrl);
                             var filename='temp_'+lang+'sub_for_' + text;
                             //var file = fs.createWriteStream(filename);
+                            var dir = 'temp';
+
+                            if (!fs.existsSync(dir)){
+                                fs.mkdirSync(dir);
+                            }
                             request({uri: downloadUrl})
                                 .pipe(fs.createWriteStream('temp/'+filename))
                                 .on('close', function() {
                                    // console.log('7zipping ' + 'temp/'+filename);
+                                    dir = 'temp/output';
+
+                                    if (!fs.existsSync(dir)){
+                                        fs.mkdirSync(dir);
+                                    }
+
                                     unzip('temp/'+filename, 'temp/output', ferr => {
-                                        if (ferr) console.log('fuck! ' + ferr); else {
+                                        if (ferr) console.log('! ' + ferr); else {
                                             console.log('done 7zipping ' + 'temp/' + filename);
                                             i--;
-                                            if (i==0) {
+                                        console.log('i=' + i);
+                                            if (i<metric) {
                                                 walk('temp/output', function(err, results) {
                                                     if (err) throw err;
                                                    // var nameSorter = relevancy.Sorter(null, results);
@@ -368,6 +382,11 @@ router.post('/caption', function(req, res, next) {
                                                         let sult = iconv.decode(srt, encoding);
                                                         var vtt = subsrt.convert(sult, { format: 'vtt' });
                                                         myBuff.push(path.basename(myfilename));
+                                                        dir = 'temp/converted';
+
+                                                        if (!fs.existsSync(dir)){
+                                                            fs.mkdirSync(dir);
+                                                        }
                                                         fs.writeFileSync('temp/converted/'+path.basename(myfilename).slice(0,-3)+'vtt', vtt, 'utf8');
                                                     });
 

@@ -584,7 +584,7 @@ angular.module('flapperNews', [
             $scope.captionsrc='Cowboy Bebop TV e01';
             $scope.sublist=['---'];
             $scope.selectCaption = function () {
-
+                Posts.subbedwords={};
                 $http.post('/getcaption?name='+encodeURIComponent($scope.selectedSub)).success(function (data,status,headers) {
                     let disposition=headers()['content-disposition'];
                     var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
