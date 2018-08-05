@@ -10,6 +10,7 @@ let mongoose = require('mongoose');
 
 let passport = require('passport');
 let app = express();
+app.use(express.static(__dirname + '/app'));
 app.set('views', path.join(__dirname, 'assets/template'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
