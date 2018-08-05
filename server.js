@@ -53,11 +53,15 @@ app.use(function(err, req, res, next) {
   });
 });
 
-let port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-let ip = process.env.OPENSHIFT_NODEJS_IP || '';
-let connectionString =  process.env.OPENSHIFT_MONGODB_DB_URL || "mongodb://127.0.0.1/mydb";
+let port = process.env.PORT || 3000;
+let ip = process.env.NODEJS_IP || '';
+let connectionString =  process.env.MONGOLAB_URI || "mongodb://127.0.0.1/mydb";
 
-mongoose.connect(connectionString);
+mongoose.connect(connectionString,  function (error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
+
 app.listen(port, ip, function() {
     console.log('%s: Node server started on %s:%d ...',
         Date(Date.now() ), ip, port);
