@@ -55,7 +55,7 @@ app.use(function(err, req, res, next) {
 
 let port = process.env.PORT || 3000;
 let ip = process.env.NODEJS_IP || '';
-let connectionString =  process.env.MONGOLAB_URI || "mongodb://127.0.0.1/mydb";
+let connectionString =  process.env.MONGODB_URI || "mongodb://127.0.0.1/mydb";
 
 mongoose.connect(connectionString,  function (error) {
     if (error) console.error(error);
