@@ -1,21 +1,8 @@
 .col-md-2.pull-right
     .sidebar.affix.pre-scrollable(style='height:100%; min-height:100%; width:15%; min-width:15%')
-            div(ng-repeat="post in posts | orderBy:'-upvotes'", style="font-size:20px")
+            div(ng-repeat="post in posts.slice().reverse()", style="font-size:20px")
                 div(class="well row")
-                    span(style="margin:10px;" ng-show="post.title")
-                        | {{post.title}}
-                        span(ng-show="post.author" style="margin:10px; opacity: 0.5;")
-                            | posted by
-                        span(class="label label-pill label-primary" ng-show="post.author" )
-                            a(href="#/profile/{{post.author}}" style="color: white;") {{post.author}}
-
-                        div(style = "display:inline; position: absolute;right: 0;margin-right:10px;")
-                            span(class="glyphicon glyphicon-thumbs-up", ng-click="incrementUpvotes(post)")
-                            span(class="badge")
-                                | {{post.upvotes}}
-                        div(style = "display:inline; position: absolute;right: 10;margin-right:10px;")
-                            span(class="glyphicon glyphicon-trash", ng-click="delete(post)")
-                    img(class="img-responsive" ng-src="{{post.image}}" alt="{{post.image}}" style="margin:10px;")
+                    span(class="glyphicon glyphicon-trash", ng-click="delete(post)")
                     div(style="margin-left:20px;" ng-bind-html="post.text")
 
 
