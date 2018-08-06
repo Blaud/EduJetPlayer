@@ -9,7 +9,10 @@ var gulp = require('gulp'), // Сообственно Gulp JS
     concat = require('gulp-concat'); 
 
 gulp.task('default', function() {
-    gulp.run('build');
+    gulp.run('stylus');
+    gulp.run('jade');
+    gulp.run('images');
+    gulp.run('js');
 });
 
 // Собираем Stylus
@@ -88,7 +91,7 @@ gulp.task('build', function() {
     // js
     gulp.src(['./assets/js/**/*.js', '!./assets/js/vendor/**/*.js'])
         .pipe(concat('index.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('./build/js'));
 
     // image
