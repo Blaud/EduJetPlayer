@@ -1,22 +1,22 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "EduJetPlayer",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Learn by subtitles service",
   "keywords": [
-    "OpenShift",
+    "Learn language",
     "Node.js",
-    "application",
-    "openshift"
+    "Angular",
+    "Anki"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "EduJetPlayer team",
+    "email": "iblaudi@gmail.com",
+    "url": "https://github.com/Blaud/EduJetPlayer"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://edujetplayer.blaud.ru",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/Blaud/EduJetPlayer"
   },
   "engines": {
     "node": ">= 0.6.0",
