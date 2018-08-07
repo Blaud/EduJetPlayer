@@ -65,7 +65,7 @@ angular.module('EduJetPlayer', [
     .factory('users', ['$http', 'auth', function ($http, auth) {
         let user = {
             name:"anon",
-            image:"http://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg",
+            image:"https://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg",
             posts:[]
         };
         user.setName=function (_name="anon") {
@@ -98,7 +98,7 @@ angular.module('EduJetPlayer', [
         };
         user.reset = function () {
             user.name="anon",
-                user.image="http://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg",
+                user.image="https://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg",
                 user.posts=[];
         };
         return user;
@@ -1045,6 +1045,6 @@ angular.module('EduJetPlayer', [
             $scope.getAvatar = function () {
                 if (auth.isLoggedIn())
                return users.getImage(auth.currentUser());
-                else return "http://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg";
+                else return "https://cs412316.vk.me/v412316674/b7c/vd2U-k3VxsE.jpg";
             };
         }]);
