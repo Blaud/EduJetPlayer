@@ -1,6 +1,6 @@
 # EduJetPlayer
 This unique web service will allow you to learn any language by watching films, anime or serials.
-
+(dev chat https://t.me/EduJetPlayer)
 ## Getting Started
 
 Main feature of this service is ability to remember fragments of subtitle that you can't understand, and after that service will create list of words and phrases that you should learn in anki format. And if you complete colibration test it also could analyse video and predict phases that you should learn before watch it to understand it.
