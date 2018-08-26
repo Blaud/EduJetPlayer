@@ -1,7 +1,0 @@
-
-<div class="row"><img style="margin-right:20px;" align="left" src="{{user.image}}" alt="{{user.image}}" width="64" height="64" class="img-rounded"/>
-  <h1>{{ user.name }}</h1>
-</div>
-<hr/><br/>
-<h2>Posted:</h2>
-<div ng-repeat="post in parting | orderBy:'-upvotes'"><span ng-click="incrementUpvotes(post)" class="glyphicon glyphicon-thumbs-up">{{post.upvotes}}</span><span style="font-size:20px; margin-left:10px;" ng-show="post.title">{{post.title}} posted by {{post.author}}</span></div>
