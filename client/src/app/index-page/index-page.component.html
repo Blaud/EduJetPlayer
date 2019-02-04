@@ -1,0 +1,23 @@
+<div #particlesCanvas>
+  <particles
+    [style]="myStyle"
+    [width]="width"
+    [height]="height"
+    [params]="myParams"
+  ></particles>
+
+  <div class="center-align">
+    <button
+      class="waves-effect waves-light btn-large green"
+      libParticleEffectButton
+      pType="triangle"
+      pParticlesAmountCoefficient="4"
+      pOscillationCoefficient="400"
+      pColor="#056018"
+      [pHidden]="hidden"
+      (click)="onResumeBtnClick()"
+    >
+      EduJetPlayer
+    </button>
+  </div>
+</div>
