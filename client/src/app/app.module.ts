@@ -15,6 +15,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { IndexPageComponent } from './index-page/index-page.component';
 import { ParticlesModule } from 'angular-particle';
 import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
     OverviewPageComponent,
     LoaderComponent,
     IndexPageComponent,
+    VideoPlayerComponent,
   ],
   imports: [
     BrowserModule,

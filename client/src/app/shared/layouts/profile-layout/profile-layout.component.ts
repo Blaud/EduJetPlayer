@@ -15,8 +15,8 @@ export class ProfileLayoutComponent implements AfterViewInit {
     { url: '/profile/overview', name: 'Обзор' },
     { url: '/profile/analytics', name: 'Аналитика' },
     { url: '/profile/history', name: 'История' },
-    { url: '/profile/order', name: 'Добавить заказ' },
-    { url: '/profile/categories', name: 'Ассортимент' },
+    { url: '/profile/video', name: 'Сохраненные видео' },
+    { url: '/profile/config', name: 'Настройки' },
   ];
 
   constructor(private auth: AuthService, private router: Router) {}
