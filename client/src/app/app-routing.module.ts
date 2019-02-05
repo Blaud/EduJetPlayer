@@ -15,23 +15,23 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginPageComponent },
-      { path: 'register', component: RegisterPageComponent },
-    ],
+      { path: 'register', component: RegisterPageComponent }
+    ]
   },
   {
     path: 'profile',
     component: ProfileLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{ path: 'overview', component: OverviewPageComponent }],
+    children: [{ path: 'overview', component: OverviewPageComponent }]
   },
   {
     path: '',
-    component: IndexPageComponent,
-  },
+    component: IndexPageComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule, RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -16,6 +20,7 @@ import { IndexPageComponent } from './index-page/index-page.component';
 import { ParticlesModule } from 'angular-particle';
 import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +42,10 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
     HttpClientModule,
     ParticlesModule,
     ParticleEffectButtonModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
   ],
   providers: [
     {
