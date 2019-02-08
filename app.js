@@ -8,6 +8,13 @@ const fs = require('fs');
 const keys = require('./config/keys');
 const authRoutes = require('./routes/auth');
 
+//main routes//
+const ankiRoutes = require('./routes/anki');
+const deckRoutes = require('./routes/deck');
+const translateRoutes = require('./routes/translate');
+const userRoutes = require('./routes/user');
+const videoRoutes = require('./routes/video');
+
 const app = express();
 
 mongoose
@@ -26,6 +33,13 @@ app.use(bodyParser.json());
 
 //auth route
 app.use('/api/auth', authRoutes);
+
+//main routes//
+app.use('/api/anki', ankiRoutes);
+app.use('/api/deck', deckRoutes);
+app.use('/api/translate', translateRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/video', videoRoutes);
 
 //create file for loader.io verification
 let stream = fs.createWriteStream(
