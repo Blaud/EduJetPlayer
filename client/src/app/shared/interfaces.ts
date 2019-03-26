@@ -21,3 +21,9 @@ export interface Position {
   category: string;
   _id?: string;
 }
+
+export interface TextToTranslate {
+  from: string;
+  to: string;
+  text: string;
+}

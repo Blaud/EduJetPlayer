@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
+import { TranslatorService } from '../shared/services/translator.service';
+import { TextToTranslate } from '../shared/interfaces';
 
 declare var VTTCue;
 
@@ -17,11 +19,14 @@ export interface ICuePoint {
   styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent implements OnInit {
+  // TODO: move subtitles to another (it own) component?
+  // TODO: select whole word even if part selected.
+  // TODO: translate whole caption on empty space click.
   preload = 'auto';
   api: VgAPI;
   activeCuePoints: ICuePoint[] = [];
 
-  constructor() {}
+  constructor(private translatorServoce: TranslatorService) {}
 
   ngOnInit() {}
 
@@ -44,16 +49,31 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   showSelectedText(oField) {
-    let text = '';
+    const test: TextToTranslate = {
+      from: 'en',
+      to: 'ru',
+      text: '',
+    };
+
     if (window.getSelection) {
-      text = window.getSelection().toString();
+      test.text = window.getSelection().toString();
     } else if (
       document.getSelection() &&
       document.getSelection().type !== 'Control'
     ) {
-      text = document.getSelection().toString();
+      test.text = document.getSelection().toString();
     }
-    console.log(text);
+
+    // console.log(text);
+
+    this.translatorServoce.translate(test).subscribe(
+      translatedText => {
+        console.log(translatedText.text);
+      },
+      error => {
+        console.log(error.error.message);
+      }
+    );
   }
 
   onMouseEnter(event) {
