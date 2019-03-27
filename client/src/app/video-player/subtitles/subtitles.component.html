@@ -1,0 +1,11 @@
+<ng-container *ngIf="activeCuePoints">
+  <div
+    *ngFor="let cuePointData of activeCuePoints"
+    class="captions-layer"
+    (mouseup)="showSelectedText()"
+    (mouseenter)="onMouseEnter($event)"
+    (mouseleave)="onMouseLeave($event)"
+  >
+    {{ cuePointData?.description }}
+  </div>
+</ng-container>

@@ -27,3 +27,11 @@ export interface TextToTranslate {
   to: string;
   text: string;
 }
+
+export interface ICuePoint {
+  id: string;
+  title: string;
+  description: string;
+  src: string;
+  href: string;
+}

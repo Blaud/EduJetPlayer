@@ -20,6 +20,7 @@ import { IndexPageComponent } from './index-page/index-page.component';
 import { ParticlesModule } from 'angular-particle';
 import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { SubtitlesComponent } from './video-player/subtitles/subtitles.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
     LoaderComponent,
     IndexPageComponent,
     VideoPlayerComponent,
+    SubtitlesComponent,
   ],
   imports: [
     BrowserModule,

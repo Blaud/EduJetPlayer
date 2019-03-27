@@ -1,16 +1,5 @@
 <vg-player (onPlayerReady)="onPlayerReady($event)">
-  <ng-container *ngIf="activeCuePoints">
-    <div
-      *ngFor="let cuePointData of activeCuePoints"
-      class="captions-layer"
-      (mouseup)="showSelectedText()"
-      (mouseenter)="onMouseEnter($event)"
-      (mouseleave)="onMouseLeave($event)"
-    >
-      {{ cuePointData?.description }}
-    </div>
-  </ng-container>
-
+  <app-subtitles #subtitles [api]="api"></app-subtitles>
   <vg-overlay-play></vg-overlay-play>
   <vg-buffering></vg-buffering>
 
@@ -58,8 +47,8 @@
       srclang="en"
       default
       vgCuePoints
-      (onEnterCuePoint)="onEnterCuePoint($event)"
-      (onExitCuePoint)="onExitCuePoint($event)"
+      (onEnterCuePoint)="subtitles.onEnterCuePoint($event)"
+      (onExitCuePoint)="subtitles.onExitCuePoint($event)"
     />
     <track
       kind="subtitles"
