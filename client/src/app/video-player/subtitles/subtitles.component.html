@@ -1,4 +1,12 @@
 <ng-container *ngIf="activeCuePoints">
+  <div *ngIf="stopedOnSubtitle" class="translation-layer">
+    <select *ngIf="currentTranslation" class="lang-selector">
+      <option value="1" selected>ru</option>
+      <option value="2">en</option>
+      <option value="3">jp</option>
+    </select>
+    {{ currentTranslation }}
+  </div>
   <div
     *ngFor="let cuePointData of activeCuePoints"
     class="captions-layer"

@@ -12,8 +12,11 @@ export class SubtitlesComponent implements OnInit {
   @Input('api') api: VgAPI;
 
   activeCuePoints: ICuePoint[] = [];
+  stopedOnSubtitle = false;
+  currentTranslation = '';
+  stopedOnTranslation = false;
 
-  constructor(private translatorServoce: TranslatorService) {}
+  constructor(private translatorService: TranslatorService) {}
 
   ngOnInit() {}
 
@@ -29,6 +32,9 @@ export class SubtitlesComponent implements OnInit {
 
   onExitCuePoint(event) {
     this.activeCuePoints = this.activeCuePoints.filter(c => c.id !== event.id);
+    this.stopedOnTranslation = false;
+    this.stopedOnSubtitle = false;
+    this.currentTranslation = '';
   }
 
   showSelectedText(oField) {
@@ -47,22 +53,34 @@ export class SubtitlesComponent implements OnInit {
       test.text = document.getSelection().toString();
     }
 
-    // console.log(text);
+    if (!test.text) {
+      test.text = this.activeCuePoints[0].title;
+    }
 
-    this.translatorServoce.translate(test).subscribe(
+    this.translatorService.translate(test).subscribe(
       translatedText => {
-        console.log(translatedText.text);
+        this.currentTranslation = translatedText.text;
       },
       error => {
+        this.currentTranslation = error.error.message;
         console.log(error.error.message);
       }
     );
+    this.stopedOnTranslation = true;
   }
 
   onMouseEnter(event) {
     this.api.pause();
+    this.stopedOnSubtitle = true;
   }
   onMouseLeave(event) {
-    this.api.play();
+    // if user translated text, player wount start after mouse leave
+    if (!this.stopedOnTranslation) {
+      this.api.play();
+      this.stopedOnSubtitle = false;
+      this.currentTranslation = '';
+    } else {
+      this.stopedOnTranslation = false;
+    }
   }
 }

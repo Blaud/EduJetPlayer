@@ -12,9 +12,10 @@ import { VgAPI } from 'videogular2/core';
   styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent implements OnInit, AfterViewChecked {
-  // TODO: move subtitles to another (it own) component?
   // TODO: select whole word even if part selected.
   // TODO: translate whole caption on empty space click.
+  // TODO: dont resume if stopped manually.
+  // TODO: get last lang from cookies
   preload = 'auto';
   api: VgAPI;
 
