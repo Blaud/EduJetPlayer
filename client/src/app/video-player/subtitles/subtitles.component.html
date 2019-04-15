@@ -1,5 +1,8 @@
 <ng-container *ngIf="activeCuePoints">
   <div *ngIf="stopedOnSubtitle" class="translation-layer">
+    <a *ngIf="currentTranslation" class="waves-effect waves-light"
+      ><i class="material-icons left">save</i></a
+    >
     <select *ngIf="currentTranslation" class="lang-selector">
       <option value="1" selected>ru</option>
       <option value="2">en</option>

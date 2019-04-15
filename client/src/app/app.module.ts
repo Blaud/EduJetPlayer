@@ -21,6 +21,7 @@ import { ParticlesModule } from 'angular-particle';
 import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { SubtitlesComponent } from './video-player/subtitles/subtitles.component';
+import { AnkiStatusComponent } from './shared/components/anki-status/anki-status.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SubtitlesComponent } from './video-player/subtitles/subtitles.component
     IndexPageComponent,
     VideoPlayerComponent,
     SubtitlesComponent,
+    AnkiStatusComponent,
   ],
   imports: [
     BrowserModule,
