@@ -20,7 +20,11 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.auth.isAuthenticated()) {
+    if (
+      this.auth.isAuthenticated() &&
+      !(req.url === 'http://127.0.0.1:8765/')
+      // TODO: better cors management
+    ) {
       req = req.clone({
         setHeaders: {
           Authorization: this.auth.getToken(),
