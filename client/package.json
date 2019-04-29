@@ -29,6 +29,8 @@
     "angular-particle-effect-button": "0.0.2",
     "animejs": "^2.2.0",
     "core-js": "^2.5.4",
+    "dashjs": "^2.9.3",
+    "hls.js": "^0.12.4",
     "materialize-css": "^1.0.0-rc.2",
     "rxjs": "^6.0.0",
     "typescript": "~2.7.2",

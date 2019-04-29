@@ -1,11 +1,8 @@
+import { VideoPlayerComponent } from './video-player/video-player.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {VgCoreModule} from 'videogular2/core';
-import {VgControlsModule} from 'videogular2/controls';
-import {VgOverlayPlayModule} from 'videogular2/overlay-play';
-import {VgBufferingModule} from 'videogular2/buffering';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -19,10 +16,15 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { IndexPageComponent } from './index-page/index-page.component';
 import { ParticlesModule } from 'angular-particle';
 import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
-import { VideoPlayerComponent } from './video-player/video-player.component';
-import { SubtitlesComponent } from './video-player/subtitles/subtitles.component';
 import { AnkiStatusComponent } from './shared/components/anki-status/anki-status.component';
-
+import { VideoLinkInputComponent } from './video-player/video-link-input/video-link-input.component';
+import { SubtitlesComponent } from './video-player/subtitles/subtitles.component';
+import { CommonModule } from '@angular/common';
+import { VgCoreModule } from 'videogular2/core';
+import { VgControlsModule } from 'videogular2/controls';
+import { VgOverlayPlayModule } from 'videogular2/overlay-play';
+import { VgBufferingModule } from 'videogular2/buffering';
+import { VgStreamingModule } from 'videogular2/streaming';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,10 @@ import { AnkiStatusComponent } from './shared/components/anki-status/anki-status
     OverviewPageComponent,
     LoaderComponent,
     IndexPageComponent,
-    VideoPlayerComponent,
-    SubtitlesComponent,
     AnkiStatusComponent,
+    VideoLinkInputComponent,
+    SubtitlesComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,18 +49,20 @@ import { AnkiStatusComponent } from './shared/components/anki-status/anki-status
     HttpClientModule,
     ParticlesModule,
     ParticleEffectButtonModule,
+    CommonModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
-    VgBufferingModule
+    VgBufferingModule,
+    VgStreamingModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
-      useClass: TokenInterceptor,
-    },
+      useClass: TokenInterceptor
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

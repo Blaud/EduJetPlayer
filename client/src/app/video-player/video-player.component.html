@@ -1,3 +1,7 @@
+<app-video-link-input
+  [api]="api"
+  (newVideoSoueceEvent)="newVideoSourceEvent($event)"
+></app-video-link-input>
 <vg-player (onPlayerReady)="onPlayerReady($event)">
   <app-subtitles #subtitles [api]="api"></app-subtitles>
   <vg-overlay-play></vg-overlay-play>
@@ -19,6 +23,13 @@
     <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
     <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
 
+    <vg-quality-selector
+      *ngIf="bitrates"
+      (onBitrateChange)="setBitrate($event)"
+      [bitrates]="bitrates"
+    >
+    </vg-quality-selector>
+
     <vg-track-selector></vg-track-selector>
     <vg-mute></vg-mute>
     <vg-volume></vg-volume>
@@ -26,9 +37,18 @@
     <vg-fullscreen></vg-fullscreen>
   </vg-controls>
 
-  <video [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
-    <source src="../../assets/videogular.mp4" type="video/mp4" />
-
+  <video
+    #media
+    [vgMedia]="media"
+    id="singleVideo"
+    preload="auto"
+    (onGetBitrates)="bitrates = $event"
+    [vgDash]="currentStream.source"
+    [vgHls]="currentStream.source"
+    [vgDRMToken]="currentStream.token"
+    [vgDRMLicenseServer]="currentStream.licenseServers"
+    crossorigin
+  >
     <track
       kind="subtitles"
       label="English"

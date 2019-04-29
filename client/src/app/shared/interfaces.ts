@@ -1,3 +1,4 @@
+import { IDRMLicenseServer } from 'videogular2/streaming';
 export interface User {
   email: string;
   password: string;
@@ -35,4 +36,12 @@ export interface ICuePoint {
   description: string;
   src: string;
   href: string;
+}
+
+export interface IMediaStream {
+  type: 'vod' | 'dash' | 'hls';
+  source: string;
+  label: string;
+  token?: string;
+  licenseServers?: IDRMLicenseServer;
 }

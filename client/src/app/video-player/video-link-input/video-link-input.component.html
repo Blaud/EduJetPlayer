@@ -1,0 +1,14 @@
+<div class="file-field input-field">
+  <div class="btn" (click)="onBrowseBtnClick()">
+    <span>Browse</span>
+    <input type="file" (change)="onFileSelect($event)" />
+  </div>
+
+  <div class="input-field file-path-wrapper">
+    <input
+      class="file-path validate"
+      type="text"
+      placeholder="Open local video or paste url"
+    />
+  </div>
+</div>
