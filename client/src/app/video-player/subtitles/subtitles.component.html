@@ -1,6 +1,9 @@
 <ng-container *ngIf="activeCuePoints">
   <div *ngIf="stopedOnSubtitle" class="translation-layer">
-    <a *ngIf="currentTranslation" class="waves-effect waves-light"
+    <a
+      *ngIf="currentTranslation"
+      class="waves-effect waves-light"
+      (click)="saveCard()"
       ><i class="material-icons left">save</i></a
     >
     <select *ngIf="currentTranslation" class="lang-selector">

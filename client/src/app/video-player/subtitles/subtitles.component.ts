@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { ICuePoint, TextToTranslate } from 'src/app/shared/interfaces';
 import { TranslatorService } from 'src/app/shared/services/translator.service';
+import { AnkiService } from 'src/app/shared/services/anki.service';
+import { MaterialService } from 'src/app/shared/classes/material.service';
 
 @Component({
   selector: 'app-subtitles',
   templateUrl: './subtitles.component.html',
-  styleUrls: ['./subtitles.component.css'],
+  styleUrls: ['./subtitles.component.css']
 })
 export class SubtitlesComponent implements OnInit {
   @Input('api') api: VgAPI;
@@ -16,7 +18,10 @@ export class SubtitlesComponent implements OnInit {
   currentTranslation = '';
   stopedOnTranslation = false;
 
-  constructor(private translatorService: TranslatorService) {}
+  constructor(
+    private translatorService: TranslatorService,
+    private ankiService: AnkiService
+  ) {}
 
   ngOnInit() {}
 
@@ -26,7 +31,7 @@ export class SubtitlesComponent implements OnInit {
       title: event.text,
       description: event.text,
       href: event.text,
-      src: event.text,
+      src: event.text
     });
   }
 
@@ -41,7 +46,7 @@ export class SubtitlesComponent implements OnInit {
     const test: TextToTranslate = {
       from: 'en',
       to: 'ru',
-      text: '',
+      text: ''
     };
 
     if (window.getSelection) {
@@ -82,5 +87,37 @@ export class SubtitlesComponent implements OnInit {
     } else {
       this.stopedOnTranslation = false;
     }
+  }
+
+  saveCard() {
+    const test = {
+      action: 'addNote',
+      version: 6,
+      params: {
+        note: {
+          deckName: 'English',
+          modelName: 'Basic',
+          fields: {
+            Front: this.activeCuePoints[0].title,
+            Back: this.currentTranslation
+          },
+          options: {
+            allowDuplicate: false
+          },
+          tags: ['testNote']
+        }
+      }
+    };
+
+    this.ankiService
+      .ankiConnectRequest(test.action, test.version, test.params)
+      .subscribe(
+        res => {
+          MaterialService.toast('Card added');
+        },
+        error => {
+          MaterialService.toast(error);
+        }
+      );
   }
 }
