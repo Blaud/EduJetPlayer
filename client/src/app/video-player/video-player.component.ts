@@ -92,8 +92,6 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
 
   newVideoSourceEvent(event) {
     this.bitrates = null;
-    timer(0, 10).subscribe(() => {
-      this.currentStream = event;
-    });
+    this.currentStream = event;
   }
 }
