@@ -1,4 +1,5 @@
-import { timer } from 'rxjs';
+import { SubtitlesSelectionFormComponent } from './subtitles-selection-form/subtitles-selection-form.component';
+import { SubtitlesComponent } from './subtitles/subtitles.component';
 import {
   Component,
   OnInit,
@@ -19,6 +20,9 @@ import { VgHLS } from 'videogular2/src/streaming/vg-hls/vg-hls';
 export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   @ViewChild(VgDASH) vgDash: VgDASH;
   @ViewChild(VgHLS) vgHls: VgHLS;
+  @ViewChild('subtitles') subtitles: SubtitlesComponent;
+  @ViewChild('subtitlesSelectionForm')
+  subtitlesSelectionForm: SubtitlesSelectionFormComponent;
   // TODO: select whole word even if part selected.
   // TODO: translate whole caption on empty space click.
   // TODO: dont resume if stopped manually.
@@ -93,5 +97,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   newVideoSourceEvent(event) {
     this.bitrates = null;
     this.currentStream = event;
+    this.subtitles.newVideoSource();
+    this.subtitlesSelectionForm.activateModal();
   }
 }

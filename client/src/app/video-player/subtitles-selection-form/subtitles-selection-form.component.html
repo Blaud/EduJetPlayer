@@ -1,0 +1,59 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal" #modal>
+    <div class="modal-content">
+      <h4 class="mb1">Выбрать субтитры</h4>
+      <div class="input-field">
+        <input
+          formControlName="name"
+          id="pos-name"
+          type="text"
+          [ngClass]="{
+            invalid: form.get('name').invalid && form.get('name').touched
+          }"
+        />
+        <label for="pos-name">Название</label>
+        <span
+          *ngIf="form.get('name').invalid && form.get('name').touched"
+          class="helper-text red-text"
+        >
+          Enter not empty name
+        </span>
+      </div>
+      <div class="input-field">
+        <input
+          formControlName="cost"
+          id="pos-cost"
+          type="number"
+          min="1"
+          [ngClass]="{
+            invalid: form.get('cost').invalid && form.get('cost').touched
+          }"
+        />
+        <label for="pos-cost">Url</label>
+        <span
+          *ngIf="form.get('cost').invalid && form.get('cost').touched"
+          class="helper-text red-text"
+        >
+          Enter valid cost, min = 1
+        </span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        (click)="onModalClose()"
+        class="modal-action waves-effect waves-black btn-flat"
+        [disabled]="form.disabled"
+      >
+        Отмена
+      </button>
+      <button
+        type="submit"
+        class="modal-action btn waves-effect"
+        [disabled]="form.invalid || form.disabled"
+      >
+        Сохранить
+      </button>
+    </div>
+  </div>
+</form>

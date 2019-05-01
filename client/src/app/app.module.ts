@@ -25,6 +25,7 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { VgStreamingModule } from 'videogular2/streaming';
+import { SubtitlesSelectionFormComponent } from './video-player/subtitles-selection-form/subtitles-selection-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { VgStreamingModule } from 'videogular2/streaming';
     AnkiStatusComponent,
     VideoLinkInputComponent,
     SubtitlesComponent,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    SubtitlesSelectionFormComponent
   ],
   imports: [
     BrowserModule,

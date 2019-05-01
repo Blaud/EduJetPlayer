@@ -89,6 +89,13 @@ export class SubtitlesComponent implements OnInit {
     }
   }
 
+  newVideoSource() {
+    this.activeCuePoints = [];
+    this.currentTranslation = '';
+    this.stopedOnSubtitle = false;
+    this.stopedOnTranslation = false;
+  }
+
   saveCard() {
     const test = {
       action: 'addNote',

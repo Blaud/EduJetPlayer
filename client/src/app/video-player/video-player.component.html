@@ -4,6 +4,9 @@
 ></app-video-link-input>
 <vg-player (onPlayerReady)="onPlayerReady($event)">
   <app-subtitles #subtitles [api]="api"></app-subtitles>
+  <app-subtitles-selection-form
+    #subtitlesSelectionForm
+  ></app-subtitles-selection-form>
   <vg-overlay-play></vg-overlay-play>
   <vg-buffering></vg-buffering>
 
