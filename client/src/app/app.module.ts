@@ -26,6 +26,8 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { VgStreamingModule } from 'videogular2/streaming';
 import { SubtitlesSelectionFormComponent } from './video-player/subtitles-selection-form/subtitles-selection-form.component';
+import { RefferedVideosComponent } from './reffered-videos/reffered-videos.component';
+import { LastSavedCardsComponent } from './last-saved-cards/last-saved-cards.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { SubtitlesSelectionFormComponent } from './video-player/subtitles-select
     VideoLinkInputComponent,
     SubtitlesComponent,
     VideoPlayerComponent,
-    SubtitlesSelectionFormComponent
+    SubtitlesSelectionFormComponent,
+    RefferedVideosComponent,
+    LastSavedCardsComponent
   ],
   imports: [
     BrowserModule,

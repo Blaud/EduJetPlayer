@@ -1,4 +1,4 @@
-<div #particlesCanvas>
+<div #particlesCanvas class="row">
   <particles
     [style]="myStyle"
     [width]="width"
@@ -6,7 +6,7 @@
     [params]="myParams"
   ></particles>
 
-  <div class="center-align">
+  <div class="col s12 center-align">
     <button
       class="waves-effect waves-light btn-large green"
       libParticleEffectButton
@@ -20,6 +20,14 @@
       EduJetPlayer
     </button>
     <app-anki-status></app-anki-status>
+  </div>
+  <div class="col s3 center-align">
+    <app-reffered-videos></app-reffered-videos>
+  </div>
+  <div class="col s6 center-align">
     <app-video-player></app-video-player>
+  </div>
+  <div class="col s3 center-align">
+    <app-last-saved-cards></app-last-saved-cards>
   </div>
 </div>
