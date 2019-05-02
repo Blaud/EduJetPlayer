@@ -1,11 +1,13 @@
 <app-video-link-input
   [api]="api"
-  (newVideoSoueceEvent)="newVideoSourceEvent($event)"
+  (newVideoSourceEvent)="newVideoSourceEvent($event)"
 ></app-video-link-input>
 <vg-player (onPlayerReady)="onPlayerReady($event)">
   <app-subtitles #subtitles [api]="api"></app-subtitles>
   <app-subtitles-selection-form
     #subtitlesSelectionForm
+    [api]="api"
+    (newSubtitlesSourceEvent)="newSubtitlesSourceEvent($event)"
   ></app-subtitles-selection-form>
   <vg-overlay-play></vg-overlay-play>
   <vg-buffering></vg-buffering>
@@ -33,7 +35,10 @@
     >
     </vg-quality-selector>
 
-    <vg-track-selector></vg-track-selector>
+    <vg-track-selector
+      vgFor="singleVideo"
+      (click)="subtitlesSelectionForm.activateModal()"
+    ></vg-track-selector>
     <vg-mute></vg-mute>
     <vg-volume></vg-volume>
 
@@ -53,20 +58,14 @@
     crossorigin
   >
     <track
-      kind="subtitles"
-      label="English"
-      src="../../assets/pale-blue-dot.vtt"
-      srclang="en"
+      [kind]="currentTrack.kind"
+      [label]="currentTrack.label"
+      [src]="currentTrack.src"
+      [srclang]="currentTrack.srclang"
       default
       vgCuePoints
       (onEnterCuePoint)="subtitles.onEnterCuePoint($event)"
       (onExitCuePoint)="subtitles.onExitCuePoint($event)"
-    />
-    <track
-      kind="subtitles"
-      label="Español"
-      src="../../assets/pale-blue-dot-es.vtt"
-      srclang="es"
     />
   </video>
 </vg-player>

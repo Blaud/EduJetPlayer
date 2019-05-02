@@ -8,7 +8,7 @@ import { MaterialService } from 'src/app/shared/classes/material.service';
 @Component({
   selector: 'app-subtitles',
   templateUrl: './subtitles.component.html',
-  styleUrls: ['./subtitles.component.css']
+  styleUrls: ['./subtitles.component.css'],
 })
 export class SubtitlesComponent implements OnInit {
   @Input('api') api: VgAPI;
@@ -31,7 +31,7 @@ export class SubtitlesComponent implements OnInit {
       title: event.text,
       description: event.text,
       href: event.text,
-      src: event.text
+      src: event.text,
     });
   }
 
@@ -43,10 +43,11 @@ export class SubtitlesComponent implements OnInit {
   }
 
   showSelectedText(oField) {
+    // TODO: show translation box with loader immediately
     const test: TextToTranslate = {
       from: 'en',
       to: 'ru',
-      text: ''
+      text: '',
     };
 
     if (window.getSelection) {
@@ -97,6 +98,8 @@ export class SubtitlesComponent implements OnInit {
   }
 
   saveCard() {
+    // TODO: change saving btn color to green(for 1 sec), if success, red if rejected
+    // TODO: deck, template, tags selection in user settings
     const test = {
       action: 'addNote',
       version: 6,
@@ -106,14 +109,14 @@ export class SubtitlesComponent implements OnInit {
           modelName: 'Basic',
           fields: {
             Front: this.activeCuePoints[0].title,
-            Back: this.currentTranslation
+            Back: this.currentTranslation,
           },
           options: {
-            allowDuplicate: false
+            allowDuplicate: false,
           },
-          tags: ['testNote']
-        }
-      }
+          tags: ['testNote'],
+        },
+      },
     };
 
     this.ankiService

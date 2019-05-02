@@ -9,7 +9,7 @@ import { IMediaStream } from 'src/app/shared/interfaces';
 })
 export class VideoLinkInputComponent implements OnInit {
   @Input('api') api: VgAPI;
-  @Output() newVideoSoueceEvent = new EventEmitter<IMediaStream>();
+  @Output() newVideoSourceEvent = new EventEmitter<IMediaStream>();
   constructor() {}
 
   ngOnInit() {}
@@ -27,7 +27,7 @@ export class VideoLinkInputComponent implements OnInit {
     };
 
     this.api.pause();
-    this.newVideoSoueceEvent.emit(stream);
+    this.newVideoSourceEvent.emit(stream);
   }
 
   isURL(str: string) {
@@ -44,6 +44,7 @@ export class VideoLinkInputComponent implements OnInit {
   }
 
   onInputChanged(event: any) {
+    // TODO: better link checker and classifier(VOD or hls ..etc)
     if (this.isURL(event.target.value)) {
       const stream: IMediaStream = {
         type: 'vod',
@@ -52,7 +53,7 @@ export class VideoLinkInputComponent implements OnInit {
       };
 
       this.api.pause();
-      this.newVideoSoueceEvent.emit(stream);
+      this.newVideoSourceEvent.emit(stream);
     }
   }
 }

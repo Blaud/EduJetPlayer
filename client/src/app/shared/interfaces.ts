@@ -45,3 +45,10 @@ export interface IMediaStream {
   token?: string;
   licenseServers?: IDRMLicenseServer;
 }
+
+export interface ITrack {
+  kind: string;
+  label: string;
+  src: string;
+  srclang: string;
+}

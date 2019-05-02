@@ -1,41 +1,31 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form">
   <div class="modal" #modal>
     <div class="modal-content">
-      <h4 class="mb1">Выбрать субтитры</h4>
-      <div class="input-field">
-        <input
-          formControlName="name"
-          id="pos-name"
-          type="text"
-          [ngClass]="{
-            invalid: form.get('name').invalid && form.get('name').touched
-          }"
-        />
-        <label for="pos-name">Название</label>
-        <span
-          *ngIf="form.get('name').invalid && form.get('name').touched"
-          class="helper-text red-text"
-        >
-          Enter not empty name
-        </span>
+      <h4 class="mb1">Load Subtitles</h4>
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Browse</span>
+          <input type="file" (change)="onFileSelect($event)" />
+        </div>
+
+        <div class="input-field file-path-wrapper">
+          <input
+            class="file-path validate"
+            type="text"
+            placeholder="Open local subtitles or paste url"
+            (change)="onInputChanged($event)"
+          />
+        </div>
       </div>
       <div class="input-field">
-        <input
-          formControlName="cost"
-          id="pos-cost"
-          type="number"
-          min="1"
-          [ngClass]="{
-            invalid: form.get('cost').invalid && form.get('cost').touched
-          }"
-        />
-        <label for="pos-cost">Url</label>
-        <span
-          *ngIf="form.get('cost').invalid && form.get('cost').touched"
-          class="helper-text red-text"
-        >
-          Enter valid cost, min = 1
-        </span>
+        <select class="browser-default">
+          <option value="" disabled selected
+            >Choose subtitles (if more than 1 available)</option
+          >
+          <option value="1">sub 1</option>
+          <option value="2">sub 2</option>
+          <option value="3">sub 3</option>
+        </select>
       </div>
     </div>
     <div class="modal-footer">

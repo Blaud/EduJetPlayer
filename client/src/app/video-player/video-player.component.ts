@@ -5,17 +5,18 @@ import {
   OnInit,
   ChangeDetectorRef,
   AfterViewChecked,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { VgAPI, BitrateOption } from 'videogular2/core';
-import { IMediaStream } from '../shared/interfaces';
+import { IMediaStream, ITrack } from '../shared/interfaces';
 import { VgDASH } from 'videogular2/src/streaming/vg-dash/vg-dash';
 import { VgHLS } from 'videogular2/src/streaming/vg-hls/vg-hls';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
-  styleUrls: ['./video-player.component.css']
+  styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   @ViewChild(VgDASH) vgDash: VgDASH;
@@ -24,30 +25,36 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   @ViewChild('subtitlesSelectionForm')
   subtitlesSelectionForm: SubtitlesSelectionFormComponent;
   // TODO: select whole word even if part selected.
-  // TODO: translate whole caption on empty space click.
-  // TODO: dont resume if stopped manually.
+  // TODO: dont resume (on subtitle mouse leave) if stopped manually.
   // TODO: get last lang from cookies
   currentStream: IMediaStream;
   preload = 'auto';
   api: VgAPI;
   bitrates: BitrateOption[];
 
+  currentTrack: ITrack = {
+    kind: 'subtitles',
+    label: 'English',
+    src: '../../assets/pale-blue-dot.vtt',
+    srclang: 'en',
+  };
+
   streams: IMediaStream[] = [
     {
       type: 'vod',
       label: 'VOD',
-      source: '../../assets/videogular.mp4'
+      source: '../../assets/videogular.mp4',
     },
     {
       type: 'dash',
       label: 'DASH: Multi rate Streaming',
-      source: 'http://dash.edgesuite.net/akamai/bbb_30fps/bbb_30fps.mpd'
+      source: 'http://dash.edgesuite.net/akamai/bbb_30fps/bbb_30fps.mpd',
     },
     {
       type: 'dash',
       label: 'DASH: Live Streaming',
       source:
-        'https://24x7dash-i.akamaihd.net/dash/live/900080/dash-demo/dash.mpd'
+        'https://24x7dash-i.akamaihd.net/dash/live/900080/dash-demo/dash.mpd',
     },
     {
       type: 'dash',
@@ -56,16 +63,16 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
         'https://storage.googleapis.com/shaka-demo-assets/angel-one-widevine/dash.mpd',
       licenseServers: {
         'com.widevine.alpha': {
-          serverURL: 'https://widevine-proxy.appspot.com/proxy'
-        }
-      }
+          serverURL: 'https://widevine-proxy.appspot.com/proxy',
+        },
+      },
     },
     {
       type: 'hls',
       label: 'HLS: Streaming',
       source:
-        'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8'
-    }
+        'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+    },
   ];
 
   constructor(private cdRef: ChangeDetectorRef) {}
@@ -99,5 +106,9 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
     this.currentStream = event;
     this.subtitles.newVideoSource();
     this.subtitlesSelectionForm.activateModal();
+  }
+
+  newSubtitlesSourceEvent(event) {
+    this.currentTrack = event;
   }
 }
