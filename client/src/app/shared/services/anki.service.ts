@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnkiService {
   constructor(private http: HttpClient) {}
+  cardsChangedEvent: EventEmitter<boolean> = new EventEmitter();
+
+  cardsChanged() {
+    this.cardsChangedEvent.next(true);
+  }
 
   isOnline(): Observable<string> {
     return this.http.get('http://127.0.0.1:8765/', {
-      responseType: 'text'
+      responseType: 'text',
     });
   }
 
@@ -55,7 +60,7 @@ export class AnkiService {
         const sendData = JSON.stringify({
           action,
           version,
-          params
+          params,
         });
 
         xhr.send(sendData);

@@ -4,30 +4,30 @@ export interface User {
   password: string;
   lastlang?: string;
 }
-
-export interface Category {
-  name: string;
-  imageSrc?: string;
-  user?: string;
-  _id?: string;
-}
-
 export interface Message {
   message: string;
-}
-
-export interface Position {
-  name: string;
-  cost: number;
-  user?: string;
-  category: string;
-  _id?: string;
 }
 
 export interface TextToTranslate {
   from: string;
   to: string;
   text: string;
+}
+
+export interface SimpleCard {
+  answer: string;
+  question: string;
+  deckName: string;
+  modelName: string;
+  fieldOrder: number;
+  fields: {
+    Front: { value: string; order: string };
+    Back: { value: string; order: string };
+  };
+  css: string;
+  cardId: string;
+  interval: number;
+  note: string;
 }
 
 export interface ICuePoint {

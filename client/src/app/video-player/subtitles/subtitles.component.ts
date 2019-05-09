@@ -18,6 +18,12 @@ export class SubtitlesComponent implements OnInit {
   currentTranslation = '';
   stopedOnTranslation = false;
 
+  textToTranslate: TextToTranslate = {
+    from: 'en',
+    to: 'ru',
+    text: '',
+  };
+
   constructor(
     private translatorService: TranslatorService,
     private ankiService: AnkiService
@@ -44,26 +50,21 @@ export class SubtitlesComponent implements OnInit {
 
   showSelectedText(oField) {
     // TODO: show translation box with loader immediately
-    const test: TextToTranslate = {
-      from: 'en',
-      to: 'ru',
-      text: '',
-    };
-
+    this.textToTranslate.text = '';
     if (window.getSelection) {
-      test.text = window.getSelection().toString();
+      this.textToTranslate.text = window.getSelection().toString();
     } else if (
       document.getSelection() &&
       document.getSelection().type !== 'Control'
     ) {
-      test.text = document.getSelection().toString();
+      this.textToTranslate.text = document.getSelection().toString();
     }
 
-    if (!test.text) {
-      test.text = this.activeCuePoints[0].title;
+    if (!this.textToTranslate.text) {
+      this.textToTranslate.text = this.activeCuePoints[0].title;
     }
 
-    this.translatorService.translate(test).subscribe(
+    this.translatorService.translate(this.textToTranslate).subscribe(
       translatedText => {
         this.currentTranslation = translatedText.text;
       },
@@ -108,7 +109,7 @@ export class SubtitlesComponent implements OnInit {
           deckName: 'English',
           modelName: 'Basic',
           fields: {
-            Front: this.activeCuePoints[0].title,
+            Front: this.textToTranslate.text,
             Back: this.currentTranslation,
           },
           options: {
@@ -124,6 +125,7 @@ export class SubtitlesComponent implements OnInit {
       .subscribe(
         res => {
           MaterialService.toast('Card added');
+          this.ankiService.cardsChanged();
         },
         error => {
           MaterialService.toast(error);

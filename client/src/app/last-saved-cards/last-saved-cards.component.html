@@ -1,3 +1,29 @@
-<p>
-  last-saved-cards works!
-</p>
+<div class="row" *ngIf="lastSavedCards$ | async as lastSavedCards; else loader">
+  <div class="col s12">
+    <div class="collection" *ngIf="lastSavedCards.length !== 0; else empty">
+      <a
+        *ngFor="let card of lastSavedCards"
+        class="collection-item"
+        (click)="deleteCard($event, card)"
+      >
+        <span class="trashbin">
+          <i class="material-icons center">delete</i>
+          <br />
+        </span>
+        {{ card.fields.Front.value }}
+        <hr />
+        {{ card.fields.Back.value }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <div class="center">
+    No cards yet
+  </div>
+</ng-template>

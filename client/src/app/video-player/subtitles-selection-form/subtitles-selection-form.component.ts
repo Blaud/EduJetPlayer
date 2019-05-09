@@ -54,6 +54,7 @@ export class SubtitlesSelectionFormComponent
     // TODO: add current subtitles to list if opened by lang selector
     this.modal.open();
     MaterialService.updateTextInputs();
+    this.api.pause();
   }
 
   onModalClose() {
@@ -62,6 +63,7 @@ export class SubtitlesSelectionFormComponent
 
   onFileSelect(event: any) {
     // TODO: fields for label and srclang
+    // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine)
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];

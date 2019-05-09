@@ -1,0 +1,7 @@
+.trashbin {
+  display: none;
+}
+.collection-item:hover .trashbin {
+  display: initial;
+  color: red;
+}
