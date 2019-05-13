@@ -41,16 +41,16 @@ app.use('/api/translate', translateRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/video', videoRoutes);
 
-//create file for loader.io verification
-let stream = fs.createWriteStream(
-  'client/dist/client/' + keys.loaderio + '.txt'
-);
-stream.once('open', function(fd) {
-  stream.write(keys.loaderio);
-  stream.end();
-});
-
 if (process.env.NODE_ENV === 'production') {
+  //create file for loader.io verification
+  let stream = fs.createWriteStream(
+    'client/dist/client/' + keys.loaderio + '.txt'
+  );
+  stream.once('open', function(fd) {
+    stream.write(keys.loaderio);
+    stream.end();
+  });
+  //make client available
   app.use(express.static('client/dist/client'));
 
   app.get('*', (req, res) => {

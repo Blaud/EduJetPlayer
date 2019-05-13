@@ -28,6 +28,7 @@ import { VgStreamingModule } from 'videogular2/streaming';
 import { SubtitlesSelectionFormComponent } from './video-player/subtitles-selection-form/subtitles-selection-form.component';
 import { RefferedVideosComponent } from './reffered-videos/reffered-videos.component';
 import { LastSavedCardsComponent } from './last-saved-cards/last-saved-cards.component';
+import { UserSettingsPageComponent } from './user-settings-page/user-settings-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LastSavedCardsComponent } from './last-saved-cards/last-saved-cards.com
     VideoPlayerComponent,
     SubtitlesSelectionFormComponent,
     RefferedVideosComponent,
-    LastSavedCardsComponent
+    LastSavedCardsComponent,
+    UserSettingsPageComponent
   ],
   imports: [
     BrowserModule,

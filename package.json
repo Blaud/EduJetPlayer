@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node index",
     "start debug": "node %NODE_DEBUG_OPTION% index",
-    "server": "nodemon index",
+    "server": "nodemon index --verbose",
     "client-install": "npm install --prefix client",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

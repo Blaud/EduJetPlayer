@@ -1,0 +1,40 @@
+<h4>Choose deck and model name</h4>
+<br />
+<div
+  class="input-field col s12"
+  *ngIf="userDecks$ | async as userDecks; else loader"
+>
+  <select #decknameselector *ngIf="userDecks.length !== 0; else empty">
+    <option *ngFor="let deck of userDecks" [value]="deck">
+      {{ deck }}
+    </option>
+  </select>
+  <label>Deck name select</label>
+</div>
+<br />
+<br />
+<div
+  class="input-field col s12"
+  *ngIf="userModels$ | async as userModels; else loader"
+>
+  <select #modelnameselector *ngIf="userModels.length !== 0; else empty">
+    <option *ngFor="let model of userModels" [value]="model">
+      {{ model }}
+    </option>
+  </select>
+  <label>Model name select</label>
+</div>
+
+<button type="submit" class="modal-action btn waves-effect">
+  Сохранить
+</button>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <div class="center">
+    No items available
+  </div>
+</ng-template>

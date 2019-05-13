@@ -7,6 +7,7 @@ import { ProfileLayoutComponent } from './shared/layouts/profile-layout/profile-
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { IndexPageComponent } from './index-page/index-page.component';
+import { UserSettingsPageComponent } from './user-settings-page/user-settings-page.component';
 
 const routes: Routes = [
   {
@@ -15,23 +16,26 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginPageComponent },
-      { path: 'register', component: RegisterPageComponent }
-    ]
+      { path: 'register', component: RegisterPageComponent },
+    ],
   },
   {
     path: 'profile',
     component: ProfileLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{ path: 'overview', component: OverviewPageComponent }]
+    children: [
+      { path: 'overview', component: OverviewPageComponent },
+      { path: 'usersettings', component: UserSettingsPageComponent },
+    ],
   },
   {
     path: '',
-    component: IndexPageComponent
-  }
+    component: IndexPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule, RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
