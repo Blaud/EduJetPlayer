@@ -6,10 +6,15 @@
       (click)="saveCard()"
       ><i class="material-icons left">save</i></a
     >
-    <select *ngIf="currentTranslation" class="lang-selector">
-      <option value="1" selected>ru</option>
-      <option value="2">en</option>
-      <option value="3">jp</option>
+    <select
+      *ngIf="currentTranslation"
+      class="lang-selector"
+      (change)="onLangChanged($event)"
+      #langselector
+    >
+      <option value="ru">ru</option>
+      <option value="en">en</option>
+      <option value="es">es</option>
     </select>
     {{ currentTranslation }}
   </div>

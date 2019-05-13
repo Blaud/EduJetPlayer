@@ -23,7 +23,7 @@ export class LastSavedCardsComponent implements OnInit {
     this.ankiService.cardsChangedEvent.subscribe(value => {
       if (value === true) {
         this.loadLastCards();
-        // should put focus() on input
+        // TODO: emmit event on window focus changed (user may add cards manually)
       }
     });
   }
@@ -36,7 +36,6 @@ export class LastSavedCardsComponent implements OnInit {
         query: `deck:${this.userService.currentUser.lastDeckName}`,
       },
     };
-    console.log(GetCardIDsByDeck.params);
     this.ankiService
       .ankiConnectRequest(
         GetCardIDsByDeck.action,

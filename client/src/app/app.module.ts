@@ -29,6 +29,7 @@ import { SubtitlesSelectionFormComponent } from './video-player/subtitles-select
 import { RefferedVideosComponent } from './reffered-videos/reffered-videos.component';
 import { LastSavedCardsComponent } from './last-saved-cards/last-saved-cards.component';
 import { UserSettingsPageComponent } from './user-settings-page/user-settings-page.component';
+import { TopNavLayoutComponent } from './shared/layouts/top-nav-layout/top-nav-layout.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UserSettingsPageComponent } from './user-settings-page/user-settings-pa
     SubtitlesSelectionFormComponent,
     RefferedVideosComponent,
     LastSavedCardsComponent,
-    UserSettingsPageComponent
+    UserSettingsPageComponent,
+    TopNavLayoutComponent
   ],
   imports: [
     BrowserModule,

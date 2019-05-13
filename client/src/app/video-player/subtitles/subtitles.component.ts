@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { ICuePoint, TextToTranslate } from 'src/app/shared/interfaces';
 import { TranslatorService } from 'src/app/shared/services/translator.service';
 import { AnkiService } from 'src/app/shared/services/anki.service';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-subtitles',
@@ -13,15 +14,15 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class SubtitlesComponent implements OnInit {
   @Input('api') api: VgAPI;
-
+  @ViewChild('langselector') langselectorref: ElementRef;
   activeCuePoints: ICuePoint[] = [];
   stopedOnSubtitle = false;
   currentTranslation = '';
   stopedOnTranslation = false;
-
+  // TODO: translate from sub lang(get lang from track element)
   textToTranslate: TextToTranslate = {
     from: 'en',
-    to: 'ru',
+    to: this.userService.currentUser.lastlang,
     text: '',
   };
 
@@ -50,9 +51,10 @@ export class SubtitlesComponent implements OnInit {
     this.currentTranslation = '';
   }
 
-  showSelectedText(oField) {
+  showSelectedText() {
     // TODO: show translation box with loader immediately
     this.textToTranslate.text = '';
+    this.textToTranslate.to = this.userService.currentUser.lastlang;
     if (window.getSelection) {
       this.textToTranslate.text = window.getSelection().toString();
     } else if (
@@ -69,6 +71,14 @@ export class SubtitlesComponent implements OnInit {
     this.translatorService.translate(this.textToTranslate).subscribe(
       translatedText => {
         this.currentTranslation = translatedText.text;
+
+        timer(1).subscribe(val => {
+          try {
+            this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
+          } catch (e) {
+            console.log(e);
+          }
+        });
       },
       error => {
         this.currentTranslation = error.error.message;
@@ -135,5 +145,11 @@ export class SubtitlesComponent implements OnInit {
           MaterialService.toast(error);
         }
       );
+  }
+
+  onLangChanged(event) {
+    this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
+    this.userService.updateSettings(this.userService.currentUser);
+    this.showSelectedText();
   }
 }

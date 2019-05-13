@@ -15,6 +15,10 @@ const userSchema = new Schema({
     type: String,
     default: '',
   },
+  lastlang: {
+    type: String,
+    default: 'en',
+  },
   lastDeckName: {
     type: String,
     default: 'Default',
