@@ -3,6 +3,7 @@ import { SimpleCard } from '../shared/interfaces';
 import { AnkiService } from '../shared/services/anki.service';
 import { MaterialService } from '../shared/classes/material.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-last-saved-cards',
@@ -11,8 +12,11 @@ import { Observable } from 'rxjs';
 })
 export class LastSavedCardsComponent implements OnInit {
   lastSavedCards$: Observable<SimpleCard[]>;
-
-  constructor(private ankiService: AnkiService) {}
+  // TODO: saved manually cards displayed with <br> tag
+  constructor(
+    private ankiService: AnkiService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.loadLastCards();
@@ -29,10 +33,10 @@ export class LastSavedCardsComponent implements OnInit {
       action: 'findCards',
       version: 6,
       params: {
-        query: 'deck:English',
+        query: `deck:${this.userService.currentUser.lastDeckName}`,
       },
     };
-
+    console.log(GetCardIDsByDeck.params);
     this.ankiService
       .ankiConnectRequest(
         GetCardIDsByDeck.action,

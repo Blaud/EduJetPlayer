@@ -22,8 +22,10 @@ module.exports.login = async function(req, res) {
         { expiresIn: '24h' }
       );
 
+      candidate.password = 'secured';
       res.status(200).json({
         token: `Bearer ${token}`,
+        user: candidate,
       });
     } else {
       res.status(401).json({

@@ -3,6 +3,10 @@ export interface User {
   email: string;
   password: string;
   lastlang?: string;
+  imageSrc?: string;
+  lastDeckName?: string;
+  lastModelName?: string;
+  _id?: string;
 }
 export interface Message {
   message: string;

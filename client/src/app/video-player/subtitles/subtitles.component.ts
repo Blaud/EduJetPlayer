@@ -4,6 +4,7 @@ import { ICuePoint, TextToTranslate } from 'src/app/shared/interfaces';
 import { TranslatorService } from 'src/app/shared/services/translator.service';
 import { AnkiService } from 'src/app/shared/services/anki.service';
 import { MaterialService } from 'src/app/shared/classes/material.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-subtitles',
@@ -26,7 +27,8 @@ export class SubtitlesComponent implements OnInit {
 
   constructor(
     private translatorService: TranslatorService,
-    private ankiService: AnkiService
+    private ankiService: AnkiService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -101,13 +103,15 @@ export class SubtitlesComponent implements OnInit {
   saveCard() {
     // TODO: change saving btn color to green(for 1 sec), if success, red if rejected
     // TODO: deck, template, tags selection in user settings
+    // TODO: redirect to user page if deck or model error
+    // TODO: redirect to tutorial page if anki disconnected
     const test = {
       action: 'addNote',
       version: 6,
       params: {
         note: {
-          deckName: 'English',
-          modelName: 'Basic',
+          deckName: this.userService.currentUser.lastDeckName,
+          modelName: this.userService.currentUser.lastModelName,
           fields: {
             Front: this.textToTranslate.text,
             Back: this.currentTranslation,
