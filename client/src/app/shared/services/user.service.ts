@@ -9,9 +9,19 @@ import { User } from '../interfaces';
 export class UserService {
   constructor(private http: HttpClient) {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
+    if (!this.currentUser) {
+      this.currentUser = this.defaultUser;
+    }
   }
 
   currentUser: User;
+  defaultUser: User = {
+    email: '',
+    password: 'secured',
+    lastlang: 'ru',
+    lastDeckName: 'Default',
+    lastModelName: 'Basic',
+  };
 
   fetch(user: User): Observable<User> {
     return this.http.get<User>(`/api/user/${user._id}`);
