@@ -1,26 +1,6 @@
-<div #particlesCanvas class="row">
-  <particles
-    [style]="myStyle"
-    [width]="width"
-    [height]="height"
-    [params]="myParams"
-  ></particles>
+<app-top-nav-layout></app-top-nav-layout>
 
-  <div class="col s12 center-align">
-    <button
-      class="waves-effect waves-light btn-large green"
-      libParticleEffectButton
-      pType="triangle"
-      pParticlesAmountCoefficient="4"
-      pOscillationCoefficient="400"
-      pColor="#056018"
-      [pHidden]="hidden"
-      (click)="onResumeBtnClick()"
-    >
-      EduJetPlayer
-    </button>
-    <app-anki-status></app-anki-status>
-  </div>
+<div class="row bg">
   <div class="col s3 center-align">
     <app-reffered-videos></app-reffered-videos>
   </div>

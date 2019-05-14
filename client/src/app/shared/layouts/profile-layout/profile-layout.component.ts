@@ -14,7 +14,6 @@ export class ProfileLayoutComponent implements AfterViewInit {
   links = [
     { url: '/profile/overview', name: 'Обзор' },
     { url: '/profile/usersettings', name: 'Настройки' },
-    { url: '/profile/history', name: 'История' },
     { url: '/profile/video', name: 'Сохраненные видео' },
   ];
 
@@ -27,6 +26,6 @@ export class ProfileLayoutComponent implements AfterViewInit {
   logout(event: Event) {
     event.preventDefault();
     this.auth.logout();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['/']);
   }
 }
