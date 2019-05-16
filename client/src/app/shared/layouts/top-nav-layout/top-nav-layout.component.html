@@ -1,21 +1,32 @@
-<nav>
-  <div class="row nav-wrapper grey darken-1">
-    <div class="col s3 left-align">
-      <a routerLink="/" class="brand-logo left">EduJetPlayer </a>
+<div class="row">
+  <nav>
+    <div class="nav-wrapper grey darken-1">
+      <div class="col s3 left-align">
+        <a routerLink="/" class="brand-logo left">EduJetPlayer </a>
+      </div>
+      <div class="col s1">
+        <select #LocaleSelect (change)="onLocaleChanged($event)">
+          <option value="en">en</option>
+          <option value="ru">ru</option>
+        </select>
+        <label i18n>Locale select</label>
+      </div>
+      <div class="col s3 center-align">
+        <app-anki-status></app-anki-status>
+      </div>
+      <div class="col s5">
+        <ul id="nav-mobile" class="right">
+          <li routerLinkActive="active" *ngIf="!isAuthenticated">
+            <a routerLink="auth/login" i18n>Вход</a>
+          </li>
+          <li routerLinkActive="active" *ngIf="!isAuthenticated">
+            <a routerLink="auth/register" i18n>Регистрация</a>
+          </li>
+          <li routerLinkActive="active" *ngIf="isAuthenticated">
+            <a routerLink="profile/usersettings" i18n>Личный кабинет</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="col s6 center-align"><app-anki-status></app-anki-status></div>
-    <div class="col s3">
-      <ul id="nav-mobile" class="right">
-        <li routerLinkActive="active" *ngIf="!isAuthenticated">
-          <a routerLink="auth/login">Вход</a>
-        </li>
-        <li routerLinkActive="active" *ngIf="!isAuthenticated">
-          <a routerLink="auth/register">Регистрация</a>
-        </li>
-        <li routerLinkActive="active" *ngIf="isAuthenticated">
-          <a routerLink="profile/usersettings">Личный кабинет</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
+</div>
