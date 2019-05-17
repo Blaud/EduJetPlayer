@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { IMediaStream } from 'src/app/shared/interfaces';
+import { YoutubeService } from 'src/app/shared/services/youtube.service';
 
 @Component({
   selector: 'app-video-link-input',
   templateUrl: './video-link-input.component.html',
-  styleUrls: ['./video-link-input.component.css']
+  styleUrls: ['./video-link-input.component.css'],
 })
 export class VideoLinkInputComponent implements OnInit {
   @Input('api') api: VgAPI;
   @Output() newVideoSourceEvent = new EventEmitter<IMediaStream>();
-  constructor() {}
+  constructor(private youtubeService: YoutubeService) {}
 
   ngOnInit() {}
 
@@ -23,7 +24,7 @@ export class VideoLinkInputComponent implements OnInit {
     const stream: IMediaStream = {
       type: 'vod',
       label: 'VOD',
-      source: URL.createObjectURL(file)
+      source: URL.createObjectURL(file),
     };
 
     this.api.pause();
@@ -42,18 +43,44 @@ export class VideoLinkInputComponent implements OnInit {
     ); // fragment locator
     return pattern.test(str);
   }
+  isYtUrl(str: string) {
+    const pattern = new RegExp(
+      '^((?:https?:)?\\/\\/)?' +
+        '((?:www|m)\\.)?' +
+        '((?:youtube\\.com|youtu.be))' +
+        '(\\/(?:[\\w\\-]+\\?v=|embed\\/|v\\/)?)' +
+        '([\\w\\-]+)(\\S+)?$'
+    );
+    return pattern.test(str);
+  }
 
   onInputChanged(event: any) {
     // TODO: better link checker and classifier(VOD or hls ..etc)
     if (this.isURL(event.target.value)) {
-      const stream: IMediaStream = {
-        type: 'vod',
-        label: 'VOD',
-        source: event.target.value
-      };
+      if (this.isYtUrl(event.target.value)) {
+        this.youtubeService.getDirectLink(event.target.value).subscribe(
+          res => {
+            const stream: IMediaStream = {
+              type: 'vod',
+              label: 'VOD',
+              source: res.corsUrl,
+            };
 
-      this.api.pause();
-      this.newVideoSourceEvent.emit(stream);
+            this.api.pause();
+            this.newVideoSourceEvent.emit(stream);
+          },
+          err => {}
+        );
+      } else {
+        const stream: IMediaStream = {
+          type: 'vod',
+          label: 'VOD',
+          source: event.target.value,
+        };
+
+        this.api.pause();
+        this.newVideoSourceEvent.emit(stream);
+      }
     }
   }
 }

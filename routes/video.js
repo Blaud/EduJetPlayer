@@ -4,10 +4,31 @@ const upload = require('../middleware/upload');
 const controller = require('../controllers/video');
 const router = express.Router();
 
-router.get('/', passport.authenticate('jwt', {session: false}), controller.getAll);
-router.get('/:id', passport.authenticate('jwt', {session: false}), controller.getById);
-router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.remove);
-router.post('/', passport.authenticate('jwt', {session: false}), controller.create);
-router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.update);
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  controller.getAll
+);
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  controller.getById
+);
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  controller.remove
+);
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  controller.create
+);
+router.patch(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  controller.update
+);
+router.post('/getyoutubedirecturl', controller.getYoutubeDirectUrl);
 
 module.exports = router;

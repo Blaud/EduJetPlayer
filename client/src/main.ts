@@ -20,7 +20,7 @@ if (localStorage.getItem('locale') === null) {
 
 const locale = localStorage.getItem('locale');
 declare const require;
-const translations = require(`raw-loader!./locale/messages.${locale}.xlf`);
+const translations = require(`raw-loader!./assets/messages.${locale}.xlf`);
 
 platformBrowserDynamic().bootstrapModule(AppModule, {
   providers: [
