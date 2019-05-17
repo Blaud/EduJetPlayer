@@ -10,10 +10,6 @@ import { environment } from './environments/environment';
 
 import 'materialize-css/dist/js/materialize';
 
-if (environment.production) {
-  enableProdMode();
-}
-
 if (localStorage.getItem('locale') === null) {
   localStorage.setItem('locale', 'en');
 }
@@ -21,6 +17,10 @@ if (localStorage.getItem('locale') === null) {
 const locale = localStorage.getItem('locale');
 declare const require;
 const translations = require(`raw-loader!./assets/messages.${locale}.xlf`);
+console.log(translations);
+if (environment.production) {
+  enableProdMode();
+}
 
 platformBrowserDynamic().bootstrapModule(AppModule, {
   providers: [
