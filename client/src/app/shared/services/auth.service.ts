@@ -44,6 +44,8 @@ export class AuthService {
 
   logout() {
     this.setToken(null);
+    // TODO: set default user and store locale in user
     localStorage.clear();
+    localStorage.setItem('locale', 'en');
   }
 }
