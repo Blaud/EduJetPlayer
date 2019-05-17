@@ -12,4 +12,9 @@
       (change)="onInputChanged($event)"
     />
   </div>
+  <div *ngIf="!loading; else loader"></div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

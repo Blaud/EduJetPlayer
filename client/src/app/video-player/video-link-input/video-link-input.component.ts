@@ -1,7 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { IMediaStream } from 'src/app/shared/interfaces';
 import { YoutubeService } from 'src/app/shared/services/youtube.service';
+import { MaterialService } from 'src/app/shared/classes/material.service';
 
 @Component({
   selector: 'app-video-link-input',
@@ -11,6 +20,9 @@ import { YoutubeService } from 'src/app/shared/services/youtube.service';
 export class VideoLinkInputComponent implements OnInit {
   @Input('api') api: VgAPI;
   @Output() newVideoSourceEvent = new EventEmitter<IMediaStream>();
+
+  loading = false;
+
   constructor(private youtubeService: YoutubeService) {}
 
   ngOnInit() {}
@@ -58,6 +70,8 @@ export class VideoLinkInputComponent implements OnInit {
     // TODO: better link checker and classifier(VOD or hls ..etc)
     if (this.isURL(event.target.value)) {
       if (this.isYtUrl(event.target.value)) {
+        this.loading = true;
+        this.api.pause();
         this.youtubeService.getDirectLink(event.target.value).subscribe(
           res => {
             const stream: IMediaStream = {
@@ -65,11 +79,13 @@ export class VideoLinkInputComponent implements OnInit {
               label: 'VOD',
               source: res.corsUrl,
             };
-
-            this.api.pause();
+            this.loading = false;
             this.newVideoSourceEvent.emit(stream);
           },
-          err => {}
+          err => {
+            this.loading = false;
+            MaterialService.toast(err.message);
+          }
         );
       } else {
         const stream: IMediaStream = {
