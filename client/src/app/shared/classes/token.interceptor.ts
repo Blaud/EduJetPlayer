@@ -22,8 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (
       this.auth.isAuthenticated() &&
-      (req.url === 'http://127.0.0.1:4200/' ||
-        req.url === 'https://edujetplayer.blaud.ru/')
+      req.url !== 'http://127.0.0.1:8765/'
       // TODO: better cors management
     ) {
       req = req.clone({
