@@ -19,7 +19,9 @@ import { ITrack } from 'src/app/shared/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, timer } from 'rxjs';
 import { YoutubeService } from 'src/app/shared/services/youtube.service';
-
+import { SubtitleService } from 'src/app/shared/services/subtitle.service';
+declare const require;
+const Subtitle = require('subtitle');
 @Component({
   selector: 'app-subtitles-selection-form',
   templateUrl: './subtitles-selection-form.component.html',
@@ -40,7 +42,8 @@ export class SubtitlesSelectionFormComponent
 
   constructor(
     private sanitizer: DomSanitizer,
-    private youtubeService: YoutubeService
+    private youtubeService: YoutubeService,
+    private subtitleService: SubtitleService
   ) {}
 
   ngOnInit() {
@@ -106,6 +109,16 @@ export class SubtitlesSelectionFormComponent
       ),
       srclang: 'en',
     };
+    const reader = new FileReader();
+    reader.onload = () => {
+      console.log(
+        this.subtitleService.getUnknownWords(
+          Subtitle.parse(<string>reader.result)
+        )
+      );
+    };
+
+    reader.readAsText(file);
     this.newSubtitlesSourceEvent.emit(track);
   }
 
@@ -141,14 +154,8 @@ export class SubtitlesSelectionFormComponent
       kind: 'subtitles',
       label: 'English',
       src: window.location.protocol + '//' + event.target.value,
-      srclang: event.target.value
-        .substring(
-          event.target.value.lastIndexOf('.') - 2,
-          event.target.value.length
-        )
-        .split('.')[0],
+      srclang: event.target.value.split('.').reverse()[1],
     };
-    console.log(track);
     this.api.pause();
     this.newSubtitlesSourceEvent.emit(track);
   }
