@@ -140,18 +140,15 @@ export class SubtitlesSelectionFormComponent
     const track: ITrack = {
       kind: 'subtitles',
       label: 'English',
-      src:
-        // TODO: fix link
-        <string>(
-          this.sanitizer.bypassSecurityTrustResourceUrl(
-            'http://' + event.target.value
-          )
-        ),
-      srclang: event.target.value.substring(
-        event.target.value.lastIndexOf('.') - 1,
-        event.target.value.length
-      ),
+      src: window.location.protocol + '//' + event.target.value,
+      srclang: event.target.value
+        .substring(
+          event.target.value.lastIndexOf('.') - 2,
+          event.target.value.length
+        )
+        .split('.')[0],
     };
+    console.log(track);
     this.api.pause();
     this.newSubtitlesSourceEvent.emit(track);
   }
