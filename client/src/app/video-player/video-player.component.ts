@@ -31,6 +31,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   preload = 'auto';
   api: VgAPI;
   bitrates: BitrateOption[];
+  youtubeLink: string;
 
   currentTrack: ITrack = {
     kind: 'subtitles',
@@ -104,6 +105,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   newVideoSourceEvent(event) {
     this.bitrates = null;
     this.currentStream = event;
+    this.subtitlesSelectionForm.youtubeLink = event.youtubeLink;
     this.subtitles.newVideoSource();
     this.subtitlesSelectionForm.activateModal();
   }

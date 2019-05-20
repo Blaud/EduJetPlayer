@@ -17,15 +17,17 @@
           />
         </div>
       </div>
-      <div class="input-field">
-        <select class="browser-default">
-          <option value="" disabled selected
-            >Choose subtitles (if more than 1 available)</option
-          >
-          <option value="1">sub 1</option>
-          <option value="2">sub 2</option>
-          <option value="3">sub 3</option>
+      <div class="input-field" *ngIf="!isLoading; else loader">
+        <select
+          #subtitlesselect
+          *ngIf="loadedSubtitles.length !== 0; else empty"
+          (change)="onSubtitlesSelectChange($event)"
+        >
+          <option *ngFor="let subtitle of loadedSubtitles" [value]="subtitle">
+            {{ subtitle }}
+          </option>
         </select>
+        <label>Subtitles select</label>
       </div>
     </div>
     <div class="modal-footer">
@@ -47,3 +49,13 @@
     </div>
   </div>
 </form>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <div class="center">
+    No subs available
+  </div>
+</ng-template>

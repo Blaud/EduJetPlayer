@@ -48,6 +48,7 @@ export interface IMediaStream {
   label: string;
   token?: string;
   licenseServers?: IDRMLicenseServer;
+  youtubeLink?: string;
 }
 
 export interface ITrack {

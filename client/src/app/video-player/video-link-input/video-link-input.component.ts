@@ -78,6 +78,7 @@ export class VideoLinkInputComponent implements OnInit {
               type: 'vod',
               label: 'VOD',
               source: res.corsUrl,
+              youtubeLink: event.target.value,
             };
             this.loading = false;
             this.newVideoSourceEvent.emit(stream);

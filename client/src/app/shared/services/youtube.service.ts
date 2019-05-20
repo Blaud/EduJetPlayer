@@ -13,6 +13,10 @@ export class YoutubeService {
       ytUrl: ytUrl$,
     });
   }
-  getPlayList() {}
-  getSubtitles() {}
+
+  getSubtitles(ytUrl$: string): Observable<string[]> {
+    return this.http.post<string[]>('/api/video/getyoutubesubtitles', {
+      ytUrl: ytUrl$,
+    });
+  }
 }

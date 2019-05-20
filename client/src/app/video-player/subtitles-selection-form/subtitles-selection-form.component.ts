@@ -17,6 +17,8 @@ import {
 import { VgAPI } from 'videogular2/core';
 import { ITrack } from 'src/app/shared/interfaces';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, timer } from 'rxjs';
+import { YoutubeService } from 'src/app/shared/services/youtube.service';
 
 @Component({
   selector: 'app-subtitles-selection-form',
@@ -28,9 +30,18 @@ export class SubtitlesSelectionFormComponent
   @ViewChild('modal') modalRef: ElementRef;
   @Input('api') api: VgAPI;
   @Output() newSubtitlesSourceEvent = new EventEmitter<ITrack>();
+  @ViewChild('subtitlesselect') subtitlesselectref: ElementRef;
+
   form: FormGroup;
   modal: MaterialInstance;
-  constructor(private sanitizer: DomSanitizer) {}
+  youtubeLink: string;
+  loadedSubtitles: string[] = [];
+  isLoading = false;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private youtubeService: YoutubeService
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -51,10 +62,29 @@ export class SubtitlesSelectionFormComponent
   onSubmit() {}
 
   activateModal() {
-    // TODO: add current subtitles to list if opened by lang selector
+    // TODO: add current subtitles to list if opened by lang selector(player ui right bottom btn)
+    // TODO: modal looks bad after loadin subs selector
     this.modal.open();
     MaterialService.updateTextInputs();
     this.api.pause();
+    if (this.youtubeLink) {
+      this.isLoading = true;
+
+      this.youtubeService.getSubtitles(this.youtubeLink).subscribe(
+        res => {
+          this.loadedSubtitles = res;
+          this.isLoading = false;
+          setTimeout(() => {
+            MaterialService.initializeSelect(this.subtitlesselectref);
+            MaterialService.updateTextInputs();
+          }, 1);
+        },
+        error => {
+          MaterialService.toast(error);
+          this.isLoading = false;
+        }
+      );
+    }
   }
 
   onModalClose() {
@@ -104,5 +134,23 @@ export class SubtitlesSelectionFormComponent
       this.api.pause();
       this.newSubtitlesSourceEvent.emit(track);
     }
+  }
+
+  onSubtitlesSelectChange(event) {
+    const track: ITrack = {
+      kind: 'subtitles',
+      label: 'English',
+      src:
+        'https://' +
+        <string>(
+          this.sanitizer.bypassSecurityTrustResourceUrl(event.target.value)
+        ),
+      srclang: event.target.value.substring(
+        event.target.value.lastIndexOf('.') - 1,
+        event.target.value.length
+      ),
+    };
+    this.api.pause();
+    this.newSubtitlesSourceEvent.emit(track);
   }
 }

@@ -38,6 +38,7 @@ export class UserSettingsPageComponent implements OnInit {
       )
     );
 
+    // TODO: fix double subscribe bug
     this.userDecks$.subscribe(
       res => {
         timer(1).subscribe(val => {
