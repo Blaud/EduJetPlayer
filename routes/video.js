@@ -31,5 +31,6 @@ router.patch(
 );
 router.post('/getyoutubedirecturl', controller.getYoutubeDirectUrl);
 router.post('/getyoutubesubtitles', controller.getYoutubeSubtitles);
+router.post('/convertsrttovttsubtitles', controller.convertSrtToVttSubtitles);
 
 module.exports = router;
