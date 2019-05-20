@@ -21,7 +21,7 @@ export class SubtitlesComponent implements OnInit {
   stopedOnTranslation = false;
   // TODO: translate from sub lang(get lang from track element)
   textToTranslate: TextToTranslate = {
-    from: 'en',
+    // TODO: load from language
     to: this.userService.currentUser.lastlang,
     text: '',
   };

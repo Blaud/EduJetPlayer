@@ -13,7 +13,7 @@ export interface Message {
 }
 
 export interface TextToTranslate {
-  from: string;
+  from?: string;
   to: string;
   text: string;
 }

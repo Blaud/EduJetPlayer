@@ -141,9 +141,11 @@ export class SubtitlesSelectionFormComponent
       kind: 'subtitles',
       label: 'English',
       src:
-        'https://' +
+        // TODO: fix link
         <string>(
-          this.sanitizer.bypassSecurityTrustResourceUrl(event.target.value)
+          this.sanitizer.bypassSecurityTrustResourceUrl(
+            'http://' + event.target.value
+          )
         ),
       srclang: event.target.value.substring(
         event.target.value.lastIndexOf('.') - 1,
