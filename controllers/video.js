@@ -65,6 +65,7 @@ module.exports.getYoutubeDirectUrl = async function(req, res) {
       info.corsUrl = keys.corsAnyWhereServer + info.url;
       if (req.body.userId) {
         // TODO: it is possible to make single query pop and push for last videos array to keep in 10 elements
+        // TODO: distinct lastVideos array
         await User.findOneAndUpdate(
           { _id: req.body.userId },
           {
@@ -92,21 +93,6 @@ module.exports.getYoutubeDirectUrl = async function(req, res) {
 };
 
 module.exports.getYoutubeSubtitles = async function(req, res) {
-  try {
-    youtubedl.getSubs(req.body.ytUrl, subtitlesDlOptions, function(err, files) {
-      if (err) errorHandler(res, err);
-      let liksToSubs = [];
-      files.forEach(function(element) {
-        liksToSubs.push(req.headers.host + '/uploads/' + element);
-      });
-      res.status(200).json(liksToSubs);
-    });
-  } catch (e) {
-    errorHandler(res, e);
-  }
-};
-
-module.exports.convertSrtToVttSubtitles = async function(req, res) {
   try {
     youtubedl.getSubs(req.body.ytUrl, subtitlesDlOptions, function(err, files) {
       if (err) errorHandler(res, err);

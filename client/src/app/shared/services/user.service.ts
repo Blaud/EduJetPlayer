@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces';
+import { MaterialService } from '../classes/material.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,16 @@ export class UserService {
   updateSettings(user: User): Observable<User> {
     localStorage.setItem('user', JSON.stringify(user));
     return this.http.patch<User>(`/api/user/updatesettings/${user._id}`, user);
+  }
+
+  refreshUserData() {
+    this.fetch(this.currentUser).subscribe(
+      res => {
+        this.setUser(res);
+      },
+      error => {
+        MaterialService.toast(error.message);
+      }
+    );
   }
 }

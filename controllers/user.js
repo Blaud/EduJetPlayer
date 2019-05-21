@@ -11,7 +11,10 @@ module.exports.getAll = async function(req, res) {
 
 module.exports.getById = async function(req, res) {
   try {
-    res.status(200).json(req);
+    const user = await User.findOne({
+      _id: req.params.id,
+    });
+    res.status(200).json(user);
   } catch (e) {
     errorHandler(res, e);
   }

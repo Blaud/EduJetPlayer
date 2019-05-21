@@ -88,6 +88,9 @@ export class VideoLinkInputComponent implements OnInit {
               };
               this.loading = false;
               this.newVideoSourceEvent.emit(stream);
+              if (this.userService.currentUser._id) {
+                this.userService.refreshUserData();
+              }
             },
             err => {
               this.loading = false;

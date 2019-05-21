@@ -1,3 +1,28 @@
-<p>
-  reffered-videos works!
-</p>
+<div class="row" *ngIf="userService.currentUser.lastVideos; else empty">
+  <div class="col s12">
+    <div
+      class="collection"
+      *ngIf="userService.currentUser.lastVideos.length !== 0; else empty"
+    >
+      <a
+        *ngFor="let video of userService.currentUser.lastVideos.reverse()"
+        class="collection-item"
+        (click)="openVideo($event, video)"
+      >
+        {{ video.fulltitle }}
+        <hr />
+        <img src="{{ video.thumbnail }}" width="160" height="90" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <div class="center">
+    No videos yet
+  </div>
+</ng-template>

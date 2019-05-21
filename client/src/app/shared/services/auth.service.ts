@@ -47,5 +47,6 @@ export class AuthService {
     // TODO: set default user and store locale in user
     localStorage.clear();
     localStorage.setItem('locale', 'en');
+    this.userService.setUser(this.userService.defaultUser);
   }
 }

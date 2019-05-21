@@ -6,6 +6,19 @@ export interface User {
   imageSrc?: string;
   lastDeckName?: string;
   lastModelName?: string;
+  lastVideos?: [
+    {
+      fulltitle: {
+        type: String;
+      };
+      webpage_url: {
+        type: String;
+      };
+      thumbnail: {
+        type: String;
+      };
+    }
+  ];
   _id?: string;
 }
 export interface Message {
