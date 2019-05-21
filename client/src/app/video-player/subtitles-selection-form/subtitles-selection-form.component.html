@@ -32,7 +32,7 @@
     </div>
     <span *ngIf="unknownWords">
       <a *ngFor="let word of unknownWords" class="collection-item">
-        {{ word }}
+        {{ '[' + word + ']' }}
       </a>
     </span>
     <div class="modal-footer">

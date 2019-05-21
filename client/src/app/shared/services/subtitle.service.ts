@@ -54,25 +54,31 @@ export class SubtitleService {
 
                   subtitle.forEach(function(caption) {
                     separatedSubtitleWords = separatedSubtitleWords.concat(
-                      caption.text.match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
+                      caption.text
+                        .toLowerCase()
+                        .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
 
                   (<Array<any>>res2).forEach(function(ankiCard) {
                     // TODO: detect if word learned or not(anki card property)
                     separatedAnkiWords = separatedAnkiWords.concat(
-                      // TODO: better regexp for matching words
-                      ankiCard.fields.Front.value.match(
-                        /.[^\W\d](\w|[-']{1,2}(?=\w))*/g
-                      )
+                      // TODO: remove spaces from words left
+                      // TODO: to lowercase all strings
+                      ankiCard.fields.Front.value
+                        .toLowerCase()
+                        .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
+                  separatedSubtitleWords = separatedSubtitleWords.map(el =>
+                    el.trim()
+                  );
 
                   separatedSubtitleWords = Array.from(
                     new Set(separatedSubtitleWords)
                   );
                   separatedAnkiWords = Array.from(new Set(separatedAnkiWords));
-
+                  separatedAnkiWords = separatedAnkiWords.map(el => el.trim());
                   unknownWords = separatedSubtitleWords.filter(
                     el => !separatedAnkiWords.includes(el)
                   );
