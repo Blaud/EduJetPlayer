@@ -39,6 +39,9 @@ export class SubtitlesSelectionFormComponent
   youtubeLink: string;
   loadedSubtitles: string[] = [];
   isLoading = false;
+  isSubtitleSelected = false;
+  unknownWords = undefined;
+  subtitleFile: File;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -98,6 +101,7 @@ export class SubtitlesSelectionFormComponent
     // TODO: fields for label and srclang
     // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine)
     // TODO: work with srt files
+    this.isSubtitleSelected = true;
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];
@@ -109,16 +113,9 @@ export class SubtitlesSelectionFormComponent
       ),
       srclang: 'en',
     };
-    const reader = new FileReader();
-    reader.onload = () => {
-      console.log(
-        this.subtitleService.getUnknownWords(
-          Subtitle.parse(<string>reader.result)
-        )
-      );
-    };
 
-    reader.readAsText(file);
+    this.subtitleFile = file;
+
     this.newSubtitlesSourceEvent.emit(track);
   }
 
@@ -137,6 +134,7 @@ export class SubtitlesSelectionFormComponent
 
   onInputChanged(event: any) {
     if (this.isURL(event.target.value)) {
+      this.isSubtitleSelected = true;
       const track: ITrack = {
         kind: 'subtitles',
         label: 'English',
@@ -149,7 +147,8 @@ export class SubtitlesSelectionFormComponent
     }
   }
 
-  onSubtitlesSelectChange(event) {
+  async onSubtitlesSelectChange(event) {
+    this.isSubtitleSelected = true;
     const track: ITrack = {
       kind: 'subtitles',
       label: 'English',
@@ -158,5 +157,28 @@ export class SubtitlesSelectionFormComponent
     };
     this.api.pause();
     this.newSubtitlesSourceEvent.emit(track);
+    this.subtitleFile = await this.createFileFromURL(track.src);
+  }
+
+  onShowUnknownBtnClick() {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      this.unknownWords = await this.subtitleService.getUnknownWords(
+        Subtitle.parse(<string>reader.result)
+      );
+      console.log(this.unknownWords);
+    };
+
+    reader.readAsText(this.subtitleFile);
+  }
+
+  async createFileFromURL(URL: string): Promise<File> {
+    const response = await fetch(URL);
+    const data = await response.blob();
+    const metadata = {
+      type: 'image/jpeg',
+    };
+    const file = new File([data], 'test.jpg', metadata);
+    return file;
   }
 }

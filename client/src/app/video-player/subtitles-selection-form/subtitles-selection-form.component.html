@@ -30,7 +30,19 @@
         <label>Subtitles select</label>
       </div>
     </div>
+    <span *ngIf="unknownWords">
+      <a *ngFor="let word of unknownWords" class="collection-item">
+        {{ word }}
+      </a>
+    </span>
     <div class="modal-footer">
+      <button
+        *ngIf="isSubtitleSelected"
+        class="modal-action btn waves-effect"
+        (click)="onShowUnknownBtnClick()"
+      >
+        Загрузить неизвестные слова
+      </button>
       <button
         type="button"
         (click)="onModalClose()"
@@ -43,6 +55,7 @@
         type="submit"
         class="modal-action btn waves-effect"
         [disabled]="form.invalid || form.disabled"
+        (click)="onModalClose()"
       >
         Сохранить
       </button>
