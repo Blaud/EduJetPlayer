@@ -55,7 +55,7 @@ export class SubtitleService {
 
                   subtitle.forEach(function(caption) {
                     separatedSubtitleWords = separatedSubtitleWords.concat(
-                      caption.text.match(/.*?[\.\s]+?/g)
+                      caption.text.match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
 
@@ -63,7 +63,9 @@ export class SubtitleService {
                     // TODO: detect if word learned or not(anki card property)
                     separatedAnkiWords = separatedAnkiWords.concat(
                       // TODO: better regexp for matching words
-                      ankiCard.fields.Front.value.split(' ')
+                      ankiCard.fields.Front.value.match(
+                        /.[^\W\d](\w|[-']{1,2}(?=\w))*/g
+                      )
                     );
                   });
 
@@ -78,13 +80,13 @@ export class SubtitleService {
                   resolve(unknownWords);
                 },
                 err => {
-                  MaterialService.toast(err.message);
+                  MaterialService.toast(err);
                   resolve([]);
                 }
               );
           },
           error => {
-            MaterialService.toast(error.message);
+            MaterialService.toast(error);
             resolve([]);
           }
         );

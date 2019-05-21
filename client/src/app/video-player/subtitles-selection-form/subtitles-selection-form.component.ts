@@ -101,7 +101,7 @@ export class SubtitlesSelectionFormComponent
     this.modal.close();
   }
 
-  onFileSelect(event: any) {
+  async onFileSelect(event: any) {
     // TODO: fields for label and srclang
     // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine)
     // TODO: work with srt files
@@ -118,7 +118,7 @@ export class SubtitlesSelectionFormComponent
       srclang: 'en',
     };
 
-    this.subtitleFile = file;
+    this.subtitleFile = await this.createFileFromURL(URL.createObjectURL(file));
 
     this.newSubtitlesSourceEvent.emit(track);
   }
@@ -167,6 +167,7 @@ export class SubtitlesSelectionFormComponent
   onShowUnknownBtnClick() {
     const reader = new FileReader();
     reader.onload = async () => {
+      console.log(<string>reader.result);
       this.unknownWords = await this.subtitleService.getUnknownWords(
         Subtitle.parse(<string>reader.result)
       );
@@ -185,6 +186,7 @@ export class SubtitlesSelectionFormComponent
         modelName: this.userService.currentUser.lastModelName,
         fields: {
           Front: unknownWord,
+          // TODO: Translate unknown words
           Back: 'unknownWord translation',
         },
         options: {
