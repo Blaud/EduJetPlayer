@@ -75,8 +75,12 @@ export class SubtitlesSelectionFormComponent
   activateModal() {
     // TODO: add current subtitles to list if opened by lang selector(player ui right bottom btn)
     // TODO: modal looks bad after loadin subs selector
+    if (this.subtitleFile) {
+      this.isSubtitleSelected = true;
+    }
     this.modal.open();
     MaterialService.updateTextInputs();
+    this.unknownWords = undefined;
     this.api.pause();
     if (this.youtubeLink) {
       this.isLoading = true;
@@ -107,6 +111,7 @@ export class SubtitlesSelectionFormComponent
     // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine)
     // TODO: work with srt files
     this.isSubtitleSelected = true;
+    this.unknownWords = undefined;
     event.stopPropagation();
     event.preventDefault();
     const file = event.target.files[0];
@@ -157,6 +162,7 @@ export class SubtitlesSelectionFormComponent
 
   onInputChanged(event: any) {
     if (this.isURL(event.target.value)) {
+      this.unknownWords = undefined;
       this.isSubtitleSelected = true;
       const track: ITrack = {
         kind: 'subtitles',
@@ -172,6 +178,7 @@ export class SubtitlesSelectionFormComponent
 
   async onSubtitlesSelectChange(event) {
     this.isSubtitleSelected = true;
+    this.unknownWords = undefined;
     const track: ITrack = {
       kind: 'subtitles',
       label: 'English',
@@ -186,7 +193,6 @@ export class SubtitlesSelectionFormComponent
   onShowUnknownBtnClick() {
     const reader = new FileReader();
     reader.onload = async () => {
-      console.log(<string>reader.result);
       this.unknownWords = await this.subtitleService.getUnknownWords(
         Subtitle.parse(<string>reader.result)
       );
