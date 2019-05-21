@@ -59,3 +59,17 @@ module.exports.updateSettings = async function(req, res) {
     errorHandler(res, e);
   }
 };
+
+module.exports.getLastVideos = async function(req, res) {
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pop: { lastVideos: -1 }, $push: { lastVideos: 89 } },
+      { new: true }
+    );
+    user.password = 'secured';
+    res.status(200).json(user);
+  } catch (e) {
+    errorHandler(res, e);
+  }
+};

@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
 export class YoutubeService {
   constructor(private http: HttpClient) {}
 
-  getDirectLink(ytUrl$: string): Observable<any> {
+  getDirectLink(ytUrl$: string, userId$?: string): Observable<any> {
     return this.http.post<any>('/api/video/getyoutubedirecturl', {
       ytUrl: ytUrl$,
+      userId: userId$,
     });
   }
 

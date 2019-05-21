@@ -11,6 +11,7 @@ import { VgAPI } from 'videogular2/core';
 import { IMediaStream } from 'src/app/shared/interfaces';
 import { YoutubeService } from 'src/app/shared/services/youtube.service';
 import { MaterialService } from 'src/app/shared/classes/material.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-video-link-input',
@@ -23,7 +24,10 @@ export class VideoLinkInputComponent implements OnInit {
 
   loading = false;
 
-  constructor(private youtubeService: YoutubeService) {}
+  constructor(
+    private youtubeService: YoutubeService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {}
 
@@ -72,22 +76,24 @@ export class VideoLinkInputComponent implements OnInit {
       if (this.isYtUrl(event.target.value)) {
         this.loading = true;
         this.api.pause();
-        this.youtubeService.getDirectLink(event.target.value).subscribe(
-          res => {
-            const stream: IMediaStream = {
-              type: 'vod',
-              label: 'VOD',
-              source: res.corsUrl,
-              youtubeLink: event.target.value,
-            };
-            this.loading = false;
-            this.newVideoSourceEvent.emit(stream);
-          },
-          err => {
-            this.loading = false;
-            MaterialService.toast(err.message);
-          }
-        );
+        this.youtubeService
+          .getDirectLink(event.target.value, this.userService.currentUser._id)
+          .subscribe(
+            res => {
+              const stream: IMediaStream = {
+                type: 'vod',
+                label: 'VOD',
+                source: res.corsUrl,
+                youtubeLink: event.target.value,
+              };
+              this.loading = false;
+              this.newVideoSourceEvent.emit(stream);
+            },
+            err => {
+              this.loading = false;
+              MaterialService.toast(err.message);
+            }
+          );
       } else {
         const stream: IMediaStream = {
           type: 'vod',

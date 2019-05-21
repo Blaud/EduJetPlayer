@@ -1,6 +1,7 @@
 const errorHandler = require('../utils/errorHandler');
 const youtubedl = require('@microlink/youtube-dl');
 const keys = require('../config/keys');
+const User = require('../models/User');
 
 const subtitlesDlOptions = {
   // Write automatic subtitle file (youtube only)
@@ -59,9 +60,30 @@ module.exports.update = async function(req, res) {
 
 module.exports.getYoutubeDirectUrl = async function(req, res) {
   try {
-    youtubedl.getInfo(req.body.ytUrl, function(err, info) {
+    youtubedl.getInfo(req.body.ytUrl, async function(err, info) {
       if (err) throw err;
       info.corsUrl = keys.corsAnyWhereServer + info.url;
+      if (req.body.userId) {
+        // TODO: it is possible to make single query pop and push for last videos array to keep in 10 elements
+        await User.findOneAndUpdate(
+          { _id: req.body.userId },
+          {
+            $push: {
+              lastVideos: {
+                fulltitle: info.fulltitle,
+                webpage_url: info.webpage_url,
+                thumbnail: info.thumbnail,
+              },
+            },
+          }
+        );
+        await User.findOneAndUpdate(
+          { _id: req.body.userId, 'lastVideos.10': { $exists: 1 } },
+          {
+            $pop: { lastVideos: -1 },
+          }
+        );
+      }
       res.status(200).json(info);
     });
   } catch (e) {

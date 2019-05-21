@@ -27,6 +27,19 @@ const userSchema = new Schema({
     type: String,
     default: 'Basic',
   },
+  lastVideos: [
+    {
+      fulltitle: {
+        type: String,
+      },
+      webpage_url: {
+        type: String,
+      },
+      thumbnail: {
+        type: String,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model('users', userSchema);
