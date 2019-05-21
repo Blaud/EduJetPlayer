@@ -22,6 +22,7 @@ import { YoutubeService } from 'src/app/shared/services/youtube.service';
 import { SubtitleService } from 'src/app/shared/services/subtitle.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AnkiService } from 'src/app/shared/services/anki.service';
+import VTTConverter from 'srt-webvtt';
 declare const require;
 const Subtitle = require('subtitle');
 @Component({
@@ -112,13 +113,31 @@ export class SubtitlesSelectionFormComponent
     const track: ITrack = {
       kind: 'subtitles',
       label: 'English',
-      src: <string>(
-        this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file))
-      ),
+      src: URL.createObjectURL(file),
       srclang: 'en',
     };
+    if (file.name.split('.').pop() === 'srt') {
+      const vttConverter = new VTTConverter(file);
+      vttConverter
+        .getURL()
+        .then(function(url) {
+          // Its a valid url that can be used further
+          // Set the converted URL to track's source
+          track.src = url;
+        })
+        .catch(function(err) {
+          MaterialService.toast(err);
+        });
+      this.subtitleFile = await this.createFileFromURL(track.src);
+    } else {
+      this.subtitleFile = await this.createFileFromURL(
+        URL.createObjectURL(file)
+      );
+    }
 
-    this.subtitleFile = await this.createFileFromURL(URL.createObjectURL(file));
+    track.src = <string>(
+      this.sanitizer.bypassSecurityTrustResourceUrl(track.src)
+    );
 
     this.newSubtitlesSourceEvent.emit(track);
   }

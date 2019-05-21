@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from, Subscription } from 'rxjs';
 import { AnkiService } from './anki.service';
 import { UserService } from './user.service';
 import { MaterialService } from '../classes/material.service';
