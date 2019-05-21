@@ -44,20 +44,19 @@
         Загрузить неизвестные слова
       </button>
       <button
+        *ngIf="unknownWords"
+        type="submit"
+        class="modal-action btn waves-effect"
+        (click)="onSaveUnknownWordsBtnClick()"
+      >
+        Сохранить Ниизвестные слова в коллоду
+      </button>
+      <button
         type="button"
         (click)="onModalClose()"
         class="modal-action waves-effect waves-black btn-flat"
-        [disabled]="form.disabled"
       >
-        Отмена
-      </button>
-      <button
-        type="submit"
-        class="modal-action btn waves-effect"
-        [disabled]="form.invalid || form.disabled"
-        (click)="onModalClose()"
-      >
-        Сохранить
+        Закрыть
       </button>
     </div>
   </div>

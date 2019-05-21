@@ -115,7 +115,7 @@ export class SubtitlesComponent implements OnInit {
     // TODO: deck, template, tags selection in user settings
     // TODO: redirect to user page if deck or model error
     // TODO: redirect to tutorial page if anki disconnected
-    const test = {
+    const saveCardRequest = {
       action: 'addNote',
       version: 6,
       params: {
@@ -135,7 +135,11 @@ export class SubtitlesComponent implements OnInit {
     };
 
     this.ankiService
-      .ankiConnectRequest(test.action, test.version, test.params)
+      .ankiConnectRequest(
+        saveCardRequest.action,
+        saveCardRequest.version,
+        saveCardRequest.params
+      )
       .subscribe(
         res => {
           MaterialService.toast('Card added');

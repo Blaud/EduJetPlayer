@@ -60,6 +60,7 @@ export class SubtitleService {
                   });
 
                   (<Array<any>>res2).forEach(function(ankiCard) {
+                    // TODO: detect if word learned or not(anki card property)
                     separatedAnkiWords = separatedAnkiWords.concat(
                       // TODO: better regexp for matching words
                       ankiCard.fields.Front.value.split(' ')

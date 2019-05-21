@@ -20,6 +20,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, timer } from 'rxjs';
 import { YoutubeService } from 'src/app/shared/services/youtube.service';
 import { SubtitleService } from 'src/app/shared/services/subtitle.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { AnkiService } from 'src/app/shared/services/anki.service';
 declare const require;
 const Subtitle = require('subtitle');
 @Component({
@@ -46,7 +48,9 @@ export class SubtitlesSelectionFormComponent
   constructor(
     private sanitizer: DomSanitizer,
     private youtubeService: YoutubeService,
-    private subtitleService: SubtitleService
+    private subtitleService: SubtitleService,
+    private userService: UserService,
+    private ankiService: AnkiService
   ) {}
 
   ngOnInit() {
@@ -166,10 +170,53 @@ export class SubtitlesSelectionFormComponent
       this.unknownWords = await this.subtitleService.getUnknownWords(
         Subtitle.parse(<string>reader.result)
       );
-      console.log(this.unknownWords);
+      // TODO: better condition for hiding showUnknownSubtitlesBtn
+      this.isSubtitleSelected = false;
     };
 
     reader.readAsText(this.subtitleFile);
+  }
+
+  onSaveUnknownWordsBtnClick() {
+    const notes = [];
+    this.unknownWords.forEach(unknownWord => {
+      notes.push({
+        deckName: this.userService.currentUser.lastDeckName,
+        modelName: this.userService.currentUser.lastModelName,
+        fields: {
+          Front: unknownWord,
+          Back: 'unknownWord translation',
+        },
+        options: {
+          allowDuplicate: false,
+        },
+        tags: ['testNote'],
+      });
+    });
+
+    const saveCardRequest = {
+      action: 'addNotes',
+      version: 6,
+      params: {
+        notes: notes,
+      },
+    };
+
+    this.ankiService
+      .ankiConnectRequest(
+        saveCardRequest.action,
+        saveCardRequest.version,
+        saveCardRequest.params
+      )
+      .subscribe(
+        res => {
+          MaterialService.toast('Cards added');
+          this.ankiService.cardsChanged();
+        },
+        error => {
+          MaterialService.toast(error);
+        }
+      );
   }
 
   async createFileFromURL(URL: string): Promise<File> {
