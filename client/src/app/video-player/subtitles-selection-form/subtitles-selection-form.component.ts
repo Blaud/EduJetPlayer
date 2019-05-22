@@ -218,7 +218,6 @@ export class SubtitlesSelectionFormComponent
         .replace(/"/g, '')
         .slice(1, -1),
     };
-    console.log(textToTranslate.text);
     // TODO: check if anki connected first
     // TODO: show loader while getting translation
     this.translatorService.translate(textToTranslate).subscribe(
@@ -260,7 +259,7 @@ export class SubtitlesSelectionFormComponent
               res => {
                 MaterialService.toast('Cards added');
                 this.ankiService.cardsChanged();
-                this.unknownWords = [];
+                this.unknownWords = undefined;
                 this.isSubtitleSelected = true;
               },
               err2 => {
