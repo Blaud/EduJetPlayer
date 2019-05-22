@@ -218,53 +218,58 @@ export class SubtitlesSelectionFormComponent
         .replace(/"/g, '')
         .slice(1, -1),
     };
-
+    console.log(textToTranslate.text);
+    // TODO: check if anki connected first
+    // TODO: show loader while getting translation
     this.translatorService.translate(textToTranslate).subscribe(
       translatedText => {
         console.log(this.userService.currentUser.lastlang);
         unknownWordsTranslations = translatedText.text
           .replace(/ /g, '')
           .split('|');
-        console.log(translatedText);
-        this.unknownWords.forEach((unknownWord, index) => {
-          notes.push({
-            deckName: this.userService.currentUser.lastDeckName,
-            modelName: this.userService.currentUser.lastModelName,
-            fields: {
-              Front: unknownWord,
-              // TODO: Translate unknown words
-              Back: unknownWordsTranslations[index],
-            },
-            options: {
-              allowDuplicate: false,
-            },
-            tags: ['testNote'],
+        if (this.unknownWords.length === unknownWordsTranslations.length) {
+          this.unknownWords.forEach((unknownWord, index) => {
+            notes.push({
+              deckName: this.userService.currentUser.lastDeckName,
+              modelName: this.userService.currentUser.lastModelName,
+              fields: {
+                Front: unknownWord,
+                Back: unknownWordsTranslations[index],
+              },
+              options: {
+                allowDuplicate: false,
+              },
+              tags: ['testNote'],
+            });
           });
-        });
-
-        const saveCardRequest = {
-          action: 'addNotes',
-          version: 6,
-          params: {
-            notes: notes,
-          },
-        };
-
-        this.ankiService
-          .ankiConnectRequest(
-            saveCardRequest.action,
-            saveCardRequest.version,
-            saveCardRequest.params
-          )
-          .subscribe(
-            res => {
-              MaterialService.toast('Cards added');
-              this.ankiService.cardsChanged();
+          const saveCardRequest = {
+            action: 'addNotes',
+            version: 6,
+            params: {
+              notes: notes,
             },
-            err2 => {
-              MaterialService.toast(err2);
-            }
-          );
+          };
+
+          this.ankiService
+            .ankiConnectRequest(
+              saveCardRequest.action,
+              saveCardRequest.version,
+              saveCardRequest.params
+            )
+            .subscribe(
+              res => {
+                MaterialService.toast('Cards added');
+                this.ankiService.cardsChanged();
+                this.unknownWords = [];
+                this.isSubtitleSelected = true;
+              },
+              err2 => {
+                MaterialService.toast(err2);
+              }
+            );
+        } else {
+          MaterialService.toast('Error in translations');
+        }
       },
       err1 => {
         MaterialService.toast(err1.message);

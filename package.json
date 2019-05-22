@@ -41,7 +41,7 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "google-translator": "github:731MY/google-translator",
+    "google-translator": "github:Blaud/google-translator",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "mongoose": "^5.4.2",
