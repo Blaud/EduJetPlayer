@@ -153,7 +153,12 @@ export class SubtitlesComponent implements OnInit {
 
   onLangChanged(event) {
     this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
-    this.userService.updateSettings(this.userService.currentUser);
+    this.userService.updateSettings(this.userService.currentUser).subscribe(
+      res => {},
+      err => {
+        MaterialService.toast(err.message);
+      }
+    );
     this.showSelectedText();
   }
 }

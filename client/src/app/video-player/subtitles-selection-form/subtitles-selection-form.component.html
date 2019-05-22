@@ -31,9 +31,11 @@
       </div>
     </div>
     <span *ngIf="unknownWords">
-      <a *ngFor="let word of unknownWords" class="collection-item">
-        {{ '[' + word + ']' }}
-      </a>
+      <span *ngIf="unknownWords.length !== 0; else empty2">
+        <a *ngFor="let word of unknownWords" class="collection-item">
+          {{ '[' + word + ']' }}
+        </a>
+      </span>
     </span>
     <div class="modal-footer">
       <button
@@ -69,5 +71,11 @@
 <ng-template #empty>
   <div class="center">
     No subs available
+  </div>
+</ng-template>
+
+<ng-template #empty2>
+  <div class="center">
+    No unknown words
   </div>
 </ng-template>

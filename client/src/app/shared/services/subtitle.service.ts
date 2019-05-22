@@ -56,6 +56,7 @@ export class SubtitleService {
                     separatedSubtitleWords = separatedSubtitleWords.concat(
                       caption.text
                         .toLowerCase()
+                        .replace(/"/g, ' ')
                         .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
@@ -63,9 +64,9 @@ export class SubtitleService {
                   (<Array<any>>res2).forEach(function(ankiCard) {
                     // TODO: detect if word learned or not(anki card property)
                     separatedAnkiWords = separatedAnkiWords.concat(
-                      // TODO: remove spaces from words left
-                      // TODO: to lowercase all strings
+                      // TODO: better card template parse
                       ankiCard.fields.Front.value
+                        .replace(/<br>/g, '')
                         .toLowerCase()
                         .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
@@ -78,7 +79,16 @@ export class SubtitleService {
                     new Set(separatedSubtitleWords)
                   );
                   separatedAnkiWords = Array.from(new Set(separatedAnkiWords));
-                  separatedAnkiWords = separatedAnkiWords.map(el => el.trim());
+
+                  try {
+                    separatedAnkiWords = separatedAnkiWords.map(el =>
+                      el.trim()
+                    );
+                  } catch (e) {
+                    console.log(e);
+                    resolve([]);
+                  }
+
                   unknownWords = separatedSubtitleWords.filter(
                     el => !separatedAnkiWords.includes(el)
                   );

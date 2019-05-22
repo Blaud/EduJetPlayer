@@ -10,6 +10,7 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['./user-settings-page.component.css'],
 })
 export class UserSettingsPageComponent implements OnInit {
+  // TODO: select "translate to" language
   @ViewChild('decknameselector') decknameselectorref: ElementRef;
   @ViewChild('modelnameselector') modelnameselectorref: ElementRef;
   userDecks$: Observable<string[]>;
