@@ -207,73 +207,113 @@ export class SubtitlesSelectionFormComponent
   }
 
   onSaveUnknownWordsBtnClick() {
-    const notes = [];
-    let unknownWordsTranslations = [];
-    const textToTranslate: TextToTranslate = {
-      // TODO: load from language.
-      to: this.userService.currentUser.lastlang,
-      text: JSON.stringify(this.unknownWords)
+    let chunkedUnknownWords = this.chuncArray(this.unknownWords, 900);
+    let i = 0;
+    while (i < chunkedUnknownWords.length) {
+      const stringifyedChunk = JSON.stringify(chunkedUnknownWords[i])
         .replace(/,/g, ' | ')
         .replace(/"/g, '')
-        .slice(1, -1),
-    };
-    // TODO: check if anki connected first.
-    // TODO: show loader while getting translation.
-
-    this.translatorService.translate(textToTranslate).subscribe(
-      translatedText => {
-        console.log(this.userService.currentUser.lastlang);
-        unknownWordsTranslations = translatedText.text
-          .replace(/ /g, '')
-          .split('|');
-        if (this.unknownWords.length === unknownWordsTranslations.length) {
-          this.unknownWords.forEach((unknownWord, index) => {
-            notes.push({
-              deckName: this.userService.currentUser.lastDeckName,
-              modelName: this.userService.currentUser.lastModelName,
-              fields: {
-                Front: unknownWord,
-                Back: unknownWordsTranslations[index],
-              },
-              options: {
-                allowDuplicate: false,
-              },
-              tags: ['testNote'],
-            });
-          });
-          const saveCardRequest = {
-            action: 'addNotes',
-            version: 6,
-            params: {
-              notes: notes,
-            },
+        .slice(1, -1);
+      if (stringifyedChunk.length > 5000) {
+        chunkedUnknownWords = chunkedUnknownWords.concat(
+          this.chuncArray(chunkedUnknownWords[i], 450)
+        );
+      } else {
+        const f = function(
+          iter,
+          stringifyedChunk$,
+          chunkedUnknownWords$,
+          userService$,
+          translatorService$,
+          ankiService$
+        ) {
+          const notes = [];
+          let unknownWordsTranslations = [];
+          const textToTranslate: TextToTranslate = {
+            // TODO: load from language.
+            to: userService$.currentUser.lastlang,
+            text: stringifyedChunk$,
           };
+          // TODO: check if anki connected first.
+          // TODO: show loader while getting translation.
 
-          this.ankiService
-            .ankiConnectRequest(
-              saveCardRequest.action,
-              saveCardRequest.version,
-              saveCardRequest.params
-            )
-            .subscribe(
-              res => {
-                MaterialService.toast('Cards added');
-                this.ankiService.cardsChanged();
-                this.unknownWords = undefined;
-                this.isSubtitleSelected = true;
-              },
-              err2 => {
-                MaterialService.toast(err2);
+          translatorService$.translate(textToTranslate).subscribe(
+            translatedText => {
+              unknownWordsTranslations = translatedText.text
+                .replace(/ /g, '')
+                .split('|');
+              console.log(i);
+              if (
+                chunkedUnknownWords$[iter].length ===
+                unknownWordsTranslations.length
+              ) {
+                chunkedUnknownWords$[iter].forEach((unknownWord, index) => {
+                  notes.push({
+                    deckName: userService$.currentUser.lastDeckName,
+                    modelName: userService$.currentUser.lastModelName,
+                    fields: {
+                      Front: unknownWord,
+                      Back: unknownWordsTranslations[index],
+                    },
+                    options: {
+                      allowDuplicate: false,
+                    },
+                    tags: ['testNote'],
+                  });
+                });
+                const saveCardRequest = {
+                  action: 'addNotes',
+                  version: 6,
+                  params: {
+                    notes: notes,
+                  },
+                };
+
+                ankiService$
+                  .ankiConnectRequest(
+                    saveCardRequest.action,
+                    saveCardRequest.version,
+                    saveCardRequest.params
+                  )
+                  .subscribe(
+                    res => {
+                      if (chunkedUnknownWords$.length - 1 === iter) {
+                        MaterialService.toast(
+                          `${chunkedUnknownWords$[iter].length} words added`
+                        );
+
+                        this.unknownWords = undefined;
+                        this.isSubtitleSelected = true;
+                      }
+
+                      ankiService$.cardsChanged();
+                    },
+                    err2 => {
+                      MaterialService.toast(err2);
+                    }
+                  );
+              } else {
+                MaterialService.toast('Error in translations');
               }
-            );
-        } else {
-          MaterialService.toast('Error in translations');
-        }
-      },
-      err1 => {
-        MaterialService.toast(err1.message);
+            },
+            err1 => {
+              MaterialService.toast(err1.message);
+            }
+          );
+        };
+        setTimeout(
+          f,
+          i * 1000,
+          i,
+          stringifyedChunk,
+          chunkedUnknownWords,
+          this.userService,
+          this.translatorService,
+          this.ankiService
+        );
       }
-    );
+      i++;
+    }
   }
 
   async createFileFromURL(URL: string): Promise<File> {
