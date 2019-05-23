@@ -212,7 +212,8 @@ export class SubtitlesSelectionFormComponent
     let unknownWordsTranslations = [];
     const textToTranslate: TextToTranslate = {
       // TODO: load from language
-      to: 'ru', // TODO: this.userService.currentUser.lastlang resetting to en every time
+      to: 'ru',
+      // TODO: this.userService.currentUser.lastlang resetting to en every time
       text: JSON.stringify(this.unknownWords)
         .replace(/,/g, ' | ')
         .replace(/"/g, '')
@@ -220,6 +221,7 @@ export class SubtitlesSelectionFormComponent
     };
     // TODO: check if anki connected first
     // TODO: show loader while getting translation
+
     this.translatorService.translate(textToTranslate).subscribe(
       translatedText => {
         console.log(this.userService.currentUser.lastlang);
@@ -284,5 +286,14 @@ export class SubtitlesSelectionFormComponent
     };
     const file = new File([data], 'test.jpg', metadata);
     return file;
+  }
+
+  chuncArray(array: Array<any>, chunkSize): Array<any> {
+    array = array.reduce((all, one, i) => {
+      const ch = Math.floor(i / chunkSize);
+      all[ch] = [].concat(all[ch] || [], one);
+      return all;
+    }, []);
+    return array;
   }
 }
