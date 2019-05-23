@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { MaterialService } from '../shared/classes/material.service';
 import { Observable, timer } from 'rxjs';
 import { AnkiService } from '../shared/services/anki.service';
@@ -9,10 +15,11 @@ import { UserService } from '../shared/services/user.service';
   templateUrl: './user-settings-page.component.html',
   styleUrls: ['./user-settings-page.component.css'],
 })
-export class UserSettingsPageComponent implements OnInit {
+export class UserSettingsPageComponent implements OnInit, AfterViewInit {
   // TODO: select "translate to" language.
   @ViewChild('decknameselector') decknameselectorref: ElementRef;
   @ViewChild('modelnameselector') modelnameselectorref: ElementRef;
+  @ViewChild('langselector') langselectorref: ElementRef;
   userDecks$: Observable<string[]>;
   userModels$: Observable<string[]>;
 
@@ -24,6 +31,13 @@ export class UserSettingsPageComponent implements OnInit {
   ngOnInit() {
     this.loadDecks();
     this.loadModels();
+  }
+  ngAfterViewInit() {
+    if (this.langselectorref) {
+      this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
+      MaterialService.initializeSelect(this.langselectorref);
+      MaterialService.updateTextInputs();
+    }
   }
 
   loadDecks() {
@@ -98,6 +112,16 @@ export class UserSettingsPageComponent implements OnInit {
         this.userService.setUser(res);
       },
       error => {}
+    );
+  }
+
+  onLangChanged(event) {
+    this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
+    this.userService.updateSettings(this.userService.currentUser).subscribe(
+      res => {},
+      err => {
+        MaterialService.toast(err.message);
+      }
     );
   }
 }

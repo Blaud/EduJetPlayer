@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { ICuePoint, TextToTranslate } from 'src/app/shared/interfaces';
 import { TranslatorService } from 'src/app/shared/services/translator.service';
@@ -72,7 +79,7 @@ export class SubtitlesComponent implements OnInit {
         this.currentTranslation = translatedText.text;
         console.log(this.currentTranslation);
         setTimeout(() => {
-          if (this.langselectorref.nativeElement) {
+          if (this.langselectorref) {
             this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
           }
         }, 0);

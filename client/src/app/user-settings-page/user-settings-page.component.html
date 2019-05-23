@@ -24,6 +24,19 @@
   </select>
   <label>Model name select</label>
 </div>
+<br />
+<br />
+<div
+  class="input-field col s12"
+  *ngIf="userService.currentUser.lastlang; else loader"
+>
+  <select (change)="onLangChanged($event)" #langselector>
+    <option value="ru">ru</option>
+    <option value="en">en</option>
+    <option value="es">es</option>
+  </select>
+  <label>Translate TO language select</label>
+</div>
 
 <button
   type="submit"
