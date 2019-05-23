@@ -212,8 +212,7 @@ export class SubtitlesSelectionFormComponent
     let unknownWordsTranslations = [];
     const textToTranslate: TextToTranslate = {
       // TODO: load from language
-      to: 'ru',
-      // TODO: this.userService.currentUser.lastlang resetting to en every time
+      to: this.userService.currentUser.lastlang,
       text: JSON.stringify(this.unknownWords)
         .replace(/,/g, ' | ')
         .replace(/"/g, '')

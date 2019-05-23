@@ -5,7 +5,6 @@ import { TranslatorService } from 'src/app/shared/services/translator.service';
 import { AnkiService } from 'src/app/shared/services/anki.service';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-subtitles',
@@ -71,14 +70,12 @@ export class SubtitlesComponent implements OnInit {
     this.translatorService.translate(this.textToTranslate).subscribe(
       translatedText => {
         this.currentTranslation = translatedText.text;
-
-        timer(1).subscribe(val => {
-          try {
+        console.log(this.currentTranslation);
+        setTimeout(() => {
+          if (this.langselectorref.nativeElement) {
             this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
-          } catch (e) {
-            console.log(e);
           }
-        });
+        }, 0);
       },
       error => {
         this.currentTranslation = error.error.message;
