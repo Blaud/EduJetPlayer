@@ -316,6 +316,7 @@ export class SubtitlesSelectionFormComponent
     }
   }
 
+  // returns file from url
   async createFileFromURL(URL: string): Promise<File> {
     const response = await fetch(URL);
     const data = await response.blob();
@@ -326,6 +327,7 @@ export class SubtitlesSelectionFormComponent
     return file;
   }
 
+  // separates array to chunks
   chuncArray(array: Array<any>, chunkSize): Array<any> {
     array = array.reduce((all, one, i) => {
       const ch = Math.floor(i / chunkSize);

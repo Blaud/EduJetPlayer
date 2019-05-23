@@ -15,6 +15,7 @@ export class SubtitleService {
   ) {}
 
   async getUnknownWords(subtitle: Array<any>): Promise<Array<string[]>> {
+    // this is good example how to make a lot of convolutional subscribe and return it as a promice (last subsctibe should resolve it)
     return new Promise<Array<string[]>>(resolve => {
       const GetCardIDsByDeck = {
         action: 'findCards',
@@ -25,6 +26,7 @@ export class SubtitleService {
       };
       let unknownWords;
 
+      // load cards ids
       this.ankiService
         .ankiConnectRequest(
           GetCardIDsByDeck.action,
@@ -40,7 +42,7 @@ export class SubtitleService {
                 cards: <Array<any>>res,
               },
             };
-
+            // load card infos
             await this.ankiService
               .ankiConnectRequest(
                 GetCardInfoByIDs.action,
@@ -52,6 +54,7 @@ export class SubtitleService {
                   let separatedSubtitleWords = [];
                   let separatedAnkiWords = [];
 
+                  // get separated subtitle words
                   subtitle.forEach(function(caption) {
                     separatedSubtitleWords = separatedSubtitleWords.concat(
                       caption.text
@@ -61,6 +64,7 @@ export class SubtitleService {
                     );
                   });
 
+                  // get separated anki words
                   (<Array<any>>res2).forEach(function(ankiCard) {
                     // TODO: detect if word learned or not(anki card property).
                     separatedAnkiWords = separatedAnkiWords.concat(
@@ -71,16 +75,21 @@ export class SubtitleService {
                         .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
+
+                  // delete spaces in separatedSubtitleWords
                   separatedSubtitleWords = separatedSubtitleWords.map(el =>
                     el.trim()
                   );
 
+                  // delete same words in separatedSubtitleWords
                   separatedSubtitleWords = Array.from(
                     new Set(separatedSubtitleWords)
                   );
+                  // delete same words in separatedAnkiWords
                   separatedAnkiWords = Array.from(new Set(separatedAnkiWords));
 
                   try {
+                    // delete spaces in separatedAnkiWords
                     separatedAnkiWords = separatedAnkiWords.map(el =>
                       el.trim()
                     );
