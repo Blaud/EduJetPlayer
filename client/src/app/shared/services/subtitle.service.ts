@@ -62,9 +62,9 @@ export class SubtitleService {
                   });
 
                   (<Array<any>>res2).forEach(function(ankiCard) {
-                    // TODO: detect if word learned or not(anki card property)
+                    // TODO: detect if word learned or not(anki card property).
                     separatedAnkiWords = separatedAnkiWords.concat(
-                      // TODO: better card template parse
+                      // TODO: better card template parse.
                       ankiCard.fields.Front.value
                         .replace(/<br>/g, '')
                         .toLowerCase()

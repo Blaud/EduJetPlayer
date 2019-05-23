@@ -24,9 +24,9 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   @ViewChild('subtitles') subtitles: SubtitlesComponent;
   @ViewChild('subtitlesSelectionForm')
   subtitlesSelectionForm: SubtitlesSelectionFormComponent;
-  // TODO: select whole word even if part selected.
-  // TODO: dont resume (on subtitle mouse leave) if stopped manually.
-  // TODO: get last lang from cookies
+  // TODO: select whole word even if part selected
+  // TODO: dont resume (on subtitle mouse leave) if stopped manually
+  // TODO: get last lang from cookies.
   currentStream: IMediaStream;
   preload = 'auto';
   api: VgAPI;

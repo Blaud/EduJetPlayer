@@ -15,7 +15,7 @@ const fileFilter = (req, file, cb) => {
   if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
     cb(null, true);
   } else {
-    // TODO: file filter for subs
+    // TODO: file filter for subs.
     cb(null, true);
   }
 };

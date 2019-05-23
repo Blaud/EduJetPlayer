@@ -10,7 +10,7 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['./user-settings-page.component.css'],
 })
 export class UserSettingsPageComponent implements OnInit {
-  // TODO: select "translate to" language
+  // TODO: select "translate to" language.
   @ViewChild('decknameselector') decknameselectorref: ElementRef;
   @ViewChild('modelnameselector') modelnameselectorref: ElementRef;
   userDecks$: Observable<string[]>;
@@ -39,7 +39,7 @@ export class UserSettingsPageComponent implements OnInit {
       )
     );
 
-    // TODO: fix double subscribe bug
+    // TODO: fix double subscribe bug.
     this.userDecks$.subscribe(
       res => {
         timer(1).subscribe(val => {

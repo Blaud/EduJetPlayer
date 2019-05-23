@@ -14,7 +14,7 @@ export class DynamicLocaleService {
   constructor() {}
 
   setLocale(lang: string): void {
-    // TODO: change locale without reload
+    // TODO: change locale without reload.
     localStorage.setItem('locale', lang);
     window.location.reload();
   }

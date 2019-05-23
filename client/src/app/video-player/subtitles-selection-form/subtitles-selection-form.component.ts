@@ -75,8 +75,8 @@ export class SubtitlesSelectionFormComponent
   onSubmit() {}
 
   activateModal() {
-    // TODO: add current subtitles to list if opened by lang selector(player ui right bottom btn)
-    // TODO: modal looks bad after loadin subs selector
+    // TODO: add current subtitles to list if opened by lang selector(player ui right bottom btn).
+    // TODO: modal looks bad after loadin subs selector.
     if (this.subtitleFile) {
       this.isSubtitleSelected = true;
     }
@@ -109,9 +109,8 @@ export class SubtitlesSelectionFormComponent
   }
 
   async onFileSelect(event: any) {
-    // TODO: fields for label and srclang
-    // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine)
-    // TODO: work with srt files
+    // TODO: fields for label and srclang.
+    // TODO: fix for firefox (chrome says "Resource interpreted as TextTrack but transferred with MIME type text/plain" and works fine).
     this.isSubtitleSelected = true;
     this.unknownWords = undefined;
     event.stopPropagation();
@@ -198,7 +197,7 @@ export class SubtitlesSelectionFormComponent
       this.unknownWords = await this.subtitleService.getUnknownWords(
         Subtitle.parse(<string>reader.result)
       );
-      // TODO: better condition for hiding showUnknownSubtitlesBtn
+      // TODO: better condition for hiding showUnknownSubtitlesBtn.
       if (this.unknownWords.length !== 0) {
         this.isSubtitleSelected = false;
       }
@@ -211,15 +210,15 @@ export class SubtitlesSelectionFormComponent
     const notes = [];
     let unknownWordsTranslations = [];
     const textToTranslate: TextToTranslate = {
-      // TODO: load from language
+      // TODO: load from language.
       to: this.userService.currentUser.lastlang,
       text: JSON.stringify(this.unknownWords)
         .replace(/,/g, ' | ')
         .replace(/"/g, '')
         .slice(1, -1),
     };
-    // TODO: check if anki connected first
-    // TODO: show loader while getting translation
+    // TODO: check if anki connected first.
+    // TODO: show loader while getting translation.
 
     this.translatorService.translate(textToTranslate).subscribe(
       translatedText => {

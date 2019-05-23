@@ -18,9 +18,9 @@ export class SubtitlesComponent implements OnInit {
   stopedOnSubtitle = false;
   currentTranslation = '';
   stopedOnTranslation = false;
-  // TODO: translate from sub lang(get lang from track element)
+  // TODO: translate from sub lang(get lang from track element).
   textToTranslate: TextToTranslate = {
-    // TODO: load from language
+    // TODO: load from language.
     to: this.userService.currentUser.lastlang,
     text: '',
   };
@@ -51,7 +51,7 @@ export class SubtitlesComponent implements OnInit {
   }
 
   showSelectedText() {
-    // TODO: show translation box with loader immediately
+    // TODO: show translation box with loader immediately.
     this.textToTranslate.text = '';
     this.textToTranslate.to = this.userService.currentUser.lastlang;
     if (window.getSelection) {
@@ -108,10 +108,10 @@ export class SubtitlesComponent implements OnInit {
   }
 
   saveCard() {
-    // TODO: change saving btn color to green(for 1 sec), if success, red if rejected
-    // TODO: deck, template, tags selection in user settings
-    // TODO: redirect to user page if deck or model error
-    // TODO: redirect to tutorial page if anki disconnected
+    // TODO: change saving btn color to green(for 1 sec), if success, red if rejected.
+    // TODO: deck, template, tags selection in user settings.
+    // TODO: redirect to user page if deck or model error.
+    // TODO: redirect to tutorial page if anki disconnected.
     const saveCardRequest = {
       action: 'addNote',
       version: 6,

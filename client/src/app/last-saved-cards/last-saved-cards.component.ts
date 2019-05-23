@@ -12,7 +12,7 @@ import { UserService } from '../shared/services/user.service';
 })
 export class LastSavedCardsComponent implements OnInit {
   lastSavedCards$: Observable<SimpleCard[]>;
-  // TODO: saved manually cards displayed with <br> tag
+  // TODO: saved manually cards displayed with <br> tag.
   constructor(
     private ankiService: AnkiService,
     private userService: UserService
@@ -23,7 +23,7 @@ export class LastSavedCardsComponent implements OnInit {
     this.ankiService.cardsChangedEvent.subscribe(value => {
       if (value === true) {
         this.loadLastCards();
-        // TODO: emmit event on window focus changed (user may add cards manually)
+        // TODO: emmit event on window focus changed (user may add cards manually).
       }
     });
   }
@@ -49,7 +49,7 @@ export class LastSavedCardsComponent implements OnInit {
             version: 6,
             params: {
               cards: (<Array<any>>res)
-                // TODO: fit number of cards to page size
+                // TODO: fit number of cards to page size.
                 .slice(
                   Math.max((<Array<any>>res).length - 10, 0),
                   (<Array<any>>res).length
@@ -87,7 +87,7 @@ export class LastSavedCardsComponent implements OnInit {
         deleteRequest.params
       )
       .subscribe(
-        // TODO: better error catcher (now it throws only error responce, but still works)
+        // TODO: better error catcher (now it throws only error responce, but still works).
         res => {
           MaterialService.toast('Card deleted!');
           this.ankiService.cardsChanged();

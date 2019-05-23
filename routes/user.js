@@ -22,7 +22,7 @@ router.patch(
   upload.single('image'),
   controller.update
 );
-//TODO: allow user update only user's profile (secure other users profiles)
+//TODO: allow user update only user's profile (secure other users profiles).
 router.patch(
   '/updatesettings/:id',
   passport.authenticate('jwt', { session: false }),

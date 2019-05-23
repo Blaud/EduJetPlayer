@@ -13,7 +13,7 @@ export class AnkiService {
     this.cardsChangedEvent.next(true);
   }
 
-  // TODO: make online status changed event(auto reload data in components on connected)
+  // TODO: make online status changed event(auto reload data in components on connected).
   isOnline(): Observable<string> {
     return this.http.get('http://127.0.0.1:8765/', {
       responseType: 'text',
@@ -40,7 +40,7 @@ export class AnkiService {
                     action !== 'sync' &&
                     action !== 'version'
                   ) {
-                    // TODO: handle other actions
+                    // TODO: handle other actions.
                     // saveChanges(action + "Saved", response.result);
                   }
 

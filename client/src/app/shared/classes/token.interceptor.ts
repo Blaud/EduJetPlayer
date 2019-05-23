@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (
       this.auth.isAuthenticated() &&
       req.url !== 'http://127.0.0.1:8765/'
-      // TODO: better cors management
+      // TODO: better cors management.
     ) {
       req = req.clone({
         setHeaders: {

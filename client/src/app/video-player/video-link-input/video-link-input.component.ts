@@ -71,7 +71,7 @@ export class VideoLinkInputComponent implements OnInit {
   }
 
   onInputChanged(event: any) {
-    // TODO: better link checker and classifier(VOD or hls ..etc)
+    // TODO: better link checker and classifier(VOD or hls ..etc).
     if (this.isURL(event.target.value)) {
       if (this.isYtUrl(event.target.value)) {
         this.loading = true;

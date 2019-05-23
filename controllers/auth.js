@@ -40,7 +40,7 @@ module.exports.login = async function(req, res) {
 };
 
 module.exports.register = async function(req, res) {
-  // TODO: register captcha
+  // TODO: register captcha.
   const candidate = await User.findOne({ email: req.body.email });
 
   if (candidate) {
@@ -56,7 +56,7 @@ module.exports.register = async function(req, res) {
     });
 
     try {
-      // TODO: login immediately after register (send auth token)
+      // TODO: login immediately after register (send auth token).
       await user.save();
       res.status(201).json(user);
     } catch (e) {

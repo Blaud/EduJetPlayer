@@ -12,7 +12,7 @@ const subtitlesDlOptions = {
   // are available ttml or vtt.
   format: 'vtt',
   // Languages of subtitles to download, separated by commas.
-  // TODO: download for all selected(by user) languages
+  // TODO: download for all selected(by user) languages.
   lang: 'en,ru,es',
   // The directory to save the downloaded files in.
   cwd: 'uploads/',
@@ -64,8 +64,8 @@ module.exports.getYoutubeDirectUrl = async function(req, res) {
       if (err) throw err;
       info.corsUrl = keys.corsAnyWhereServer + info.url;
       if (req.body.userId) {
-        // TODO: it is possible to make single query pop and push for last videos array to keep in 10 elements
-        // TODO: distinct lastVideos array
+        // TODO: it is possible to make single query pop and push for last videos array to keep in 10 elements.
+        // TODO: distinct lastVideos array.
         await User.findOneAndUpdate(
           { _id: req.body.userId },
           {
