@@ -34,7 +34,7 @@ export class UserService {
   }
 
   updateSettings(user: User): Observable<User> {
-    localStorage.setItem('user', JSON.stringify(user));
+    this.setUser(user);
     return this.http.patch<User>(`/api/user/updatesettings/${user._id}`, user);
   }
 

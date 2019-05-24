@@ -109,7 +109,6 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
     this.userService.updateSettings(this.userService.currentUser).subscribe(
       res => {
         MaterialService.toast('Settings Updated');
-        this.userService.setUser(res);
       },
       error => {}
     );
