@@ -34,7 +34,10 @@ export class UserService {
   }
 
   updateSettings(user: User): Observable<User> {
-    this.setUser(user);
+    this.currentUser.lastDeckName = user.lastDeckName;
+    this.currentUser.lastModelName = user.lastModelName;
+    this.currentUser.lastlang = user.lastlang;
+    localStorage.setItem('user', JSON.stringify(this.currentUser));
     return this.http.patch<User>(`/api/user/updatesettings/${user._id}`, user);
   }
 

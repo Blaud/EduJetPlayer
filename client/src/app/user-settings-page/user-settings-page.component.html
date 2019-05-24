@@ -30,7 +30,7 @@
   class="input-field col s12"
   *ngIf="userService.currentUser.lastlang; else loader"
 >
-  <select (change)="onLangChanged($event)" #langselector>
+  <select #langselector>
     <option value="ru">ru</option>
     <option value="en">en</option>
     <option value="es">es</option>

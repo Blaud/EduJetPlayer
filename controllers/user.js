@@ -52,6 +52,7 @@ module.exports.updateSettings = async function(req, res) {
         $set: {
           lastDeckName: req.body.lastDeckName,
           lastModelName: req.body.lastModelName,
+          lastLang: req.body.lastLang,
         },
       },
       { new: true }

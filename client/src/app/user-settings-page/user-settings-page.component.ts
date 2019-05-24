@@ -106,21 +106,13 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
   saveUserSettings(event) {
     this.userService.currentUser.lastDeckName = this.decknameselectorref.nativeElement.value;
     this.userService.currentUser.lastModelName = this.modelnameselectorref.nativeElement.value;
+    this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
+    console.log(this.userService.currentUser.lastlang);
     this.userService.updateSettings(this.userService.currentUser).subscribe(
       res => {
         MaterialService.toast('Settings Updated');
       },
       error => {}
-    );
-  }
-
-  onLangChanged(event) {
-    this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
-    this.userService.updateSettings(this.userService.currentUser).subscribe(
-      res => {},
-      err => {
-        MaterialService.toast(err.message);
-      }
     );
   }
 }
