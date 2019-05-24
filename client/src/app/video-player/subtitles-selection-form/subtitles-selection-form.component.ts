@@ -219,38 +219,31 @@ export class SubtitlesSelectionFormComponent
           this.chuncArray(chunkedUnknownWords[i], 450)
         );
       } else {
-        const f = function(
-          iter,
-          stringifyedChunk$,
-          chunkedUnknownWords$,
-          userService$,
-          translatorService$,
-          ankiService$
-        ) {
+        const a = iter => {
           const notes = [];
           let unknownWordsTranslations = [];
           const textToTranslate: TextToTranslate = {
             // TODO: load from language.
-            to: userService$.currentUser.lastlang,
-            text: stringifyedChunk$,
+            to: this.userService.currentUser.lastlang,
+            text: stringifyedChunk,
           };
           // TODO: check if anki connected first.
           // TODO: show loader while getting translation.
 
-          translatorService$.translate(textToTranslate).subscribe(
+          this.translatorService.translate(textToTranslate).subscribe(
             translatedText => {
+              console.log(translatedText);
               unknownWordsTranslations = translatedText.text
                 .replace(/ /g, '')
                 .split('|');
-              console.log(i);
               if (
-                chunkedUnknownWords$[iter].length ===
+                chunkedUnknownWords[iter].length ===
                 unknownWordsTranslations.length
               ) {
-                chunkedUnknownWords$[iter].forEach((unknownWord, index) => {
+                chunkedUnknownWords[iter].forEach((unknownWord, index) => {
                   notes.push({
-                    deckName: userService$.currentUser.lastDeckName,
-                    modelName: userService$.currentUser.lastModelName,
+                    deckName: this.userService.currentUser.lastDeckName,
+                    modelName: this.userService.currentUser.lastModelName,
                     fields: {
                       Front: unknownWord,
                       Back: unknownWordsTranslations[index],
@@ -269,7 +262,7 @@ export class SubtitlesSelectionFormComponent
                   },
                 };
 
-                ankiService$
+                this.ankiService
                   .ankiConnectRequest(
                     saveCardRequest.action,
                     saveCardRequest.version,
@@ -277,16 +270,14 @@ export class SubtitlesSelectionFormComponent
                   )
                   .subscribe(
                     res => {
-                      if (chunkedUnknownWords$.length - 1 === iter) {
-                        MaterialService.toast(
-                          `${chunkedUnknownWords$[iter].length} words added`
-                        );
-
+                      if (chunkedUnknownWords.length - 1 === iter) {
                         this.unknownWords = undefined;
                         this.isSubtitleSelected = true;
                       }
-
-                      ankiService$.cardsChanged();
+                      MaterialService.toast(
+                        `${chunkedUnknownWords[iter].length} words added`
+                      );
+                      this.ankiService.cardsChanged();
                     },
                     err2 => {
                       MaterialService.toast(err2);
@@ -301,16 +292,9 @@ export class SubtitlesSelectionFormComponent
             }
           );
         };
-        setTimeout(
-          f,
-          i * 1000,
-          i,
-          stringifyedChunk,
-          chunkedUnknownWords,
-          this.userService,
-          this.translatorService,
-          this.ankiService
-        );
+        // bypass arrow function rest parameters and default parameters limit
+        // @ts-ignore
+        setTimeout(a(i), i * 1000);
       }
       i++;
     }
