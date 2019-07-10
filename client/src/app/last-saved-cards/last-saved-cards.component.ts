@@ -12,7 +12,6 @@ import { UserService } from '../shared/services/user.service';
 })
 export class LastSavedCardsComponent implements OnInit {
   lastSavedCards$: Observable<SimpleCard[]>;
-  // TODO: saved manually cards displayed with <br> tag.
   constructor(
     private ankiService: AnkiService,
     private userService: UserService
@@ -97,5 +96,9 @@ export class LastSavedCardsComponent implements OnInit {
           this.ankiService.cardsChanged();
         }
       );
+  }
+
+  removeBrTag(text: String) {
+    return text.replace(/<br>/g, '');
   }
 }
