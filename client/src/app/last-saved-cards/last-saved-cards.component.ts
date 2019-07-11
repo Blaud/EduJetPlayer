@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SimpleCard } from '../shared/interfaces';
 import { AnkiService } from '../shared/services/anki.service';
 import { MaterialService } from '../shared/classes/material.service';
@@ -22,9 +22,13 @@ export class LastSavedCardsComponent implements OnInit {
     this.ankiService.cardsChangedEvent.subscribe(value => {
       if (value === true) {
         this.loadLastCards();
-        // TODO: emmit event on window focus changed (user may add cards manually).
       }
     });
+  }
+
+  @HostListener('window:focus', ['$event'])
+  onFocus(event: any): void {
+    this.loadLastCards();
   }
 
   loadLastCards() {
