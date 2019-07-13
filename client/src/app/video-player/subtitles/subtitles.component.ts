@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  Renderer2,
 } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { ICuePoint, TextToTranslate } from 'src/app/shared/interfaces';
@@ -21,6 +22,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class SubtitlesComponent implements OnInit {
   @Input('api') api: VgAPI;
   @ViewChild('langselector') langselectorref: ElementRef;
+  @ViewChild('savebtn') savebtnref: ElementRef;
   activeCuePoints: ICuePoint[] = [];
   stopedOnSubtitle = false;
   currentTranslation = '';
@@ -35,7 +37,8 @@ export class SubtitlesComponent implements OnInit {
   constructor(
     private translatorService: TranslatorService,
     private ankiService: AnkiService,
-    private userService: UserService
+    private userService: UserService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {}
@@ -77,7 +80,6 @@ export class SubtitlesComponent implements OnInit {
     this.translatorService.translate(this.textToTranslate).subscribe(
       translatedText => {
         this.currentTranslation = translatedText.text;
-        console.log(this.currentTranslation);
         setTimeout(() => {
           if (this.langselectorref) {
             this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
@@ -148,9 +150,17 @@ export class SubtitlesComponent implements OnInit {
         res => {
           MaterialService.toast('Card added');
           this.ankiService.cardsChanged();
+          this.renderer.addClass(this.savebtnref.nativeElement, 'green');
+          setTimeout(() => {
+            this.renderer.removeClass(this.savebtnref.nativeElement, 'green');
+          }, 1000);
         },
         error => {
           MaterialService.toast(error);
+          this.renderer.addClass(this.savebtnref.nativeElement, 'red');
+          setTimeout(() => {
+            this.renderer.removeClass(this.savebtnref.nativeElement, 'red');
+          }, 1000);
         }
       );
   }
