@@ -39,6 +39,22 @@
 </div>
 
 <br />
+<br />
+
+<div
+  class="input-field col s12"
+  *ngIf="userService.currentUser.lastlang; else loader"
+>
+  <select #fromlangselector>
+    <option value="ru">ru</option>
+    <option value="en">en</option>
+    <option value="es">es</option>
+  </select>
+  <label>Translate FROM language select</label>
+</div>
+
+<br />
+<br />
 
 <div class="input-field col s12">
   <input type="text" placeholder="testNote" #tagselector />

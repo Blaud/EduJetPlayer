@@ -20,6 +20,7 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
   @ViewChild('decknameselector') decknameselectorref: ElementRef;
   @ViewChild('modelnameselector') modelnameselectorref: ElementRef;
   @ViewChild('langselector') langselectorref: ElementRef;
+  @ViewChild('fromlangselector') fromlangselectorref: ElementRef;
   userDecks$: Observable<string[]>;
   userModels$: Observable<string[]>;
 
@@ -36,6 +37,10 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
     if (this.langselectorref) {
       this.langselectorref.nativeElement.value = this.userService.currentUser.lastlang;
       MaterialService.initializeSelect(this.langselectorref);
+
+      // TODO: save tags and from lang to user object in database
+      this.fromlangselectorref.nativeElement.value = this.userService.currentUser.lastlang;
+      MaterialService.initializeSelect(this.fromlangselectorref);
       MaterialService.updateTextInputs();
     }
   }

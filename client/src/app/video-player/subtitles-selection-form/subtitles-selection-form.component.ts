@@ -223,7 +223,6 @@ export class SubtitlesSelectionFormComponent
           const notes = [];
           let unknownWordsTranslations = [];
           const textToTranslate: TextToTranslate = {
-            // TODO: load from language.
             to: this.userService.currentUser.lastlang,
             text: stringifyedChunk,
           };
