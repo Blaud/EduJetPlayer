@@ -4,6 +4,7 @@ import { AnkiService } from '../shared/services/anki.service';
 import { MaterialService } from '../shared/classes/material.service';
 import { Observable } from 'rxjs';
 import { UserService } from '../shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-last-saved-cards',
@@ -14,7 +15,8 @@ export class LastSavedCardsComponent implements OnInit {
   lastSavedCards$: Observable<SimpleCard[]>;
   constructor(
     private ankiService: AnkiService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -69,7 +71,10 @@ export class LastSavedCardsComponent implements OnInit {
           );
         },
         error => {
-          MaterialService.toast(error);
+          if (error === 'invalidSearch') {
+            this.router.navigate(['/profile/usersettings']);
+            MaterialService.toast('Choose valid deck and model name');
+          } else { MaterialService.toast(error); }
         }
       );
   }

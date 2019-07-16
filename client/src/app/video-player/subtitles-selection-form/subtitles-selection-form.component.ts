@@ -207,16 +207,16 @@ export class SubtitlesSelectionFormComponent
   }
 
   onSaveUnknownWordsBtnClick() {
-    let chunkedUnknownWords = this.chuncArray(this.unknownWords, 900);
+    let chunkedUnknownWords = this.chuncArray(this.unknownWords, 500);
     let i = 0;
     while (i < chunkedUnknownWords.length) {
       const stringifyedChunk = JSON.stringify(chunkedUnknownWords[i])
         .replace(/,/g, ' | ')
         .replace(/"/g, '')
         .slice(1, -1);
-      if (stringifyedChunk.length > 5000) {
+      if (stringifyedChunk.length > 2500) {
         chunkedUnknownWords = chunkedUnknownWords.concat(
-          this.chuncArray(chunkedUnknownWords[i], 450)
+          this.chuncArray(chunkedUnknownWords[i], 250)
         );
       } else {
         const processChunc = iter => {

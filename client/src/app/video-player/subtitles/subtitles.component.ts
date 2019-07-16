@@ -13,6 +13,7 @@ import { TranslatorService } from 'src/app/shared/services/translator.service';
 import { AnkiService } from 'src/app/shared/services/anki.service';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subtitles',
@@ -38,7 +39,8 @@ export class SubtitlesComponent implements OnInit {
     private translatorService: TranslatorService,
     private ankiService: AnkiService,
     private userService: UserService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -117,8 +119,6 @@ export class SubtitlesComponent implements OnInit {
   }
 
   saveCard() {
-    // TODO: redirect to user page if deck or model error.
-    // TODO: redirect to tutorial page if anki disconnected.
     const saveCardRequest = {
       action: 'addNote',
       version: 6,
@@ -154,11 +154,16 @@ export class SubtitlesComponent implements OnInit {
           }, 1000);
         },
         error => {
-          MaterialService.toast(error);
-          this.renderer.addClass(this.savebtnref.nativeElement, 'red');
-          setTimeout(() => {
-            this.renderer.removeClass(this.savebtnref.nativeElement, 'red');
-          }, 1000);
+          if (error === 'failed to connect to AnkiConnect') {
+            this.router.navigate(['/tutorial']);
+            MaterialService.toast('u need to cannect anki before saving cards');
+          } else {
+            MaterialService.toast(error);
+            this.renderer.addClass(this.savebtnref.nativeElement, 'red');
+            setTimeout(() => {
+              this.renderer.removeClass(this.savebtnref.nativeElement, 'red');
+            }, 1000);
+          }
         }
       );
   }
