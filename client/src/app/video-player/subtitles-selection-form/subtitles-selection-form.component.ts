@@ -206,19 +206,19 @@ export class SubtitlesSelectionFormComponent
   }
 
   onSaveUnknownWordsBtnClick() {
-    let chunkedUnknownWords = this.chuncArray(this.unknownWords, 500);
+    let chunkedUnknownWords = this.chuncArray(this.unknownWords, 900);
     let i = 0;
     while (i < chunkedUnknownWords.length) {
       const stringifyedChunk = JSON.stringify(chunkedUnknownWords[i])
-        .replace(/,/g, ' | ')
+        .replace(/,/g, ' || ')
         .replace(/"/g, '')
-        .replace(/./g, '')
         .slice(1, -1);
-      if (stringifyedChunk.length > 2500) {
+      if (stringifyedChunk.length > 5000) {
         chunkedUnknownWords = chunkedUnknownWords.concat(
-          this.chuncArray(chunkedUnknownWords[i], 250)
+          this.chuncArray(chunkedUnknownWords[i], 450)
         );
       } else {
+        console.log(stringifyedChunk);
         const processChunc = iter => {
           const notes = [];
           let unknownWordsTranslations = [];
@@ -228,15 +228,15 @@ export class SubtitlesSelectionFormComponent
           };
           // TODO: check if anki connected first.
           // TODO: show loader while getting translation.
+          console.log(iter);
           this.translatorService
             .translate(textToTranslate)
             .pipe(delay(iter * 2000))
             .subscribe(
               translatedText => {
-                console.log(translatedText);
                 unknownWordsTranslations = translatedText.text
                   .replace(/ /g, '')
-                  .split('|');
+                  .split('||');
                 if (
                   chunkedUnknownWords[iter].length ===
                   unknownWordsTranslations.length
@@ -285,6 +285,9 @@ export class SubtitlesSelectionFormComponent
                       }
                     );
                 } else {
+                  console.log(chunkedUnknownWords[iter]);
+                  console.log(unknownWordsTranslations);
+                  console.log(translatedText.text);
                   MaterialService.toast('Error in translations');
                 }
               },
@@ -296,7 +299,7 @@ export class SubtitlesSelectionFormComponent
         // bypass arrow function rest parameters and default parameters limit
         // this timeout for saving i parameter at current state
         // @ts-ignore
-        setTimeout(processChunc(i), 0);
+        setTimeout(processChunc(i), 5000);
       }
       i++;
     }

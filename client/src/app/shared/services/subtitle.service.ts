@@ -59,7 +59,9 @@ export class SubtitleService {
                     separatedSubtitleWords = separatedSubtitleWords.concat(
                       caption.text
                         .toLowerCase()
+                        .replace(/[.]/g, ' ')
                         .replace(/"/g, ' ')
+                        .replace(/[']/g, '')
                         .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
@@ -71,15 +73,16 @@ export class SubtitleService {
                       // TODO: better card template parse.
                       ankiCard.fields.Front.value
                         .replace(/<br>/g, '')
+                        .replace(/[']/g, '')
                         .toLowerCase()
                         .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
                     );
                   });
 
                   // delete spaces in separatedSubtitleWords
-                  separatedSubtitleWords = separatedSubtitleWords.map(el =>
-                    el.trim()
-                  );
+                  separatedSubtitleWords = separatedSubtitleWords
+                    .filter(Boolean)
+                    .map(el => el.trim());
 
                   // delete same words in separatedSubtitleWords
                   separatedSubtitleWords = Array.from(
@@ -87,12 +90,11 @@ export class SubtitleService {
                   );
                   // delete same words in separatedAnkiWords
                   separatedAnkiWords = Array.from(new Set(separatedAnkiWords));
-
                   try {
                     // delete spaces in separatedAnkiWords
-                    separatedAnkiWords = separatedAnkiWords.map(el =>
-                      el.trim()
-                    );
+                    separatedAnkiWords = separatedAnkiWords
+                      .filter(Boolean)
+                      .map(el => el.trim());
                   } catch (e) {
                     console.log(e);
                     resolve([]);
