@@ -197,7 +197,6 @@ export class SubtitlesSelectionFormComponent
       this.unknownWords = await this.subtitleService.getUnknownWords(
         Subtitle.parse(<string>reader.result)
       );
-      // TODO: better condition for hiding showUnknownSubtitlesBtn.
       if (this.unknownWords.length !== 0) {
         this.isSubtitleSelected = false;
       }
@@ -213,6 +212,7 @@ export class SubtitlesSelectionFormComponent
       const stringifyedChunk = JSON.stringify(chunkedUnknownWords[i])
         .replace(/,/g, ' | ')
         .replace(/"/g, '')
+        .replace(/./g, '')
         .slice(1, -1);
       if (stringifyedChunk.length > 2500) {
         chunkedUnknownWords = chunkedUnknownWords.concat(
@@ -228,7 +228,6 @@ export class SubtitlesSelectionFormComponent
           };
           // TODO: check if anki connected first.
           // TODO: show loader while getting translation.
-
           this.translatorService
             .translate(textToTranslate)
             .pipe(delay(iter * 2000))

@@ -45,14 +45,19 @@
       >
         Загрузить неизвестные слова
       </button>
-      <button
-        *ngIf="unknownWords"
-        type="submit"
-        class="modal-action btn waves-effect"
-        (click)="onSaveUnknownWordsBtnClick()"
-      >
-        Сохранить Ниизвестные слова в коллоду
-      </button>
+
+      <span *ngIf="unknownWords">
+        <span *ngIf="unknownWords.length !== 0">
+          <button
+            type="submit"
+            class="modal-action btn waves-effect"
+            (click)="onSaveUnknownWordsBtnClick()"
+          >
+            Сохранить Ниизвестные слова в коллоду
+          </button>
+        </span>
+      </span>
+
       <button
         type="button"
         (click)="onModalClose()"
