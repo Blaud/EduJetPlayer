@@ -65,7 +65,21 @@ module.exports.getYoutubeDirectUrl = async function(req, res) {
       info.corsUrl = keys.corsAnyWhereServer + info.url;
       if (req.body.userId) {
         // TODO: it is possible to make single query pop and push for last videos array to keep in 10 elements.
-        // TODO: distinct lastVideos array.
+        // TODO: find better way to distinct lastVideos array.
+
+        await User.findOneAndUpdate(
+          { _id: req.body.userId },
+          {
+            $pull: {
+              lastVideos: {
+                fulltitle: info.fulltitle,
+                webpage_url: info.webpage_url,
+                thumbnail: info.thumbnail,
+              },
+            },
+          }
+        );
+
         await User.findOneAndUpdate(
           { _id: req.body.userId },
           {
@@ -78,6 +92,7 @@ module.exports.getYoutubeDirectUrl = async function(req, res) {
             },
           }
         );
+
         await User.findOneAndUpdate(
           { _id: req.body.userId, 'lastVideos.10': { $exists: 1 } },
           {

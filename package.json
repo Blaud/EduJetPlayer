@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/Blaud/edujetplayer#readme",
   "dependencies": {
-    "@microlink/youtube-dl": "^1.13.3",
+    "@microlink/youtube-dl": "^1.13.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",

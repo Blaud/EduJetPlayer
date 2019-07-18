@@ -1,6 +1,7 @@
 {
   "name": "edujetplayer",
   "version": "1.1.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
@@ -11,7 +12,8 @@
     "lint": "ng lint",
     "lint:fix": "ng lint client --fix && ng lint client-e2e --fix",
     "e2e": "ng e2e",
-    "i18n:extract": "ng xi18n --output-path locale"
+    "i18n:extract": "ng xi18n --output-path locale",
+    "electron": "ng build && electron ."
   },
   "private": true,
   "dependencies": {
@@ -48,6 +50,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "electron": "^5.0.7",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.0.0",
