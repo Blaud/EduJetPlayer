@@ -30,11 +30,13 @@
         <label>Subtitles select</label>
       </div>
     </div>
-    <span *ngIf="unknownWords">
-      <span *ngIf="unknownWords.length !== 0; else empty2">
-        <a *ngFor="let word of unknownWords" class="collection-item">
-          {{ '[' + word + ']' }}
-        </a>
+    <span *ngIf="!isLoading; else loader">
+      <span *ngIf="unknownWords">
+        <span *ngIf="unknownWords.length !== 0; else empty2">
+          <a *ngFor="let word of unknownWords" class="collection-item">
+            {{ '[' + word + ']' }}
+          </a>
+        </span>
       </span>
     </span>
     <div class="modal-footer">

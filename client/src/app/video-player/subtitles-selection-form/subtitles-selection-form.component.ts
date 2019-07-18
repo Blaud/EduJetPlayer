@@ -206,6 +206,7 @@ export class SubtitlesSelectionFormComponent
   }
 
   onSaveUnknownWordsBtnClick() {
+    this.isLoading = true;
     let chunkedUnknownWords = this.chuncArray(this.unknownWords, 900);
     let i = 0;
     while (i < chunkedUnknownWords.length) {
@@ -218,24 +219,23 @@ export class SubtitlesSelectionFormComponent
           this.chuncArray(chunkedUnknownWords[i], 450)
         );
       } else {
-        console.log(stringifyedChunk);
         const processChunc = iter => {
           const notes = [];
           let unknownWordsTranslations = [];
+          // TODO: get "translate from" lang from user
           const textToTranslate: TextToTranslate = {
+            from: 'en',
             to: this.userService.currentUser.lastlang,
             text: stringifyedChunk,
           };
           // TODO: check if anki connected first.
-          // TODO: show loader while getting translation.
-          console.log(iter);
           this.translatorService
             .translate(textToTranslate)
             .pipe(delay(iter * 2000))
             .subscribe(
               translatedText => {
                 unknownWordsTranslations = translatedText.text
-                  .replace(/ /g, '')
+                  .replace(/[ ]/g, '')
                   .split('||');
                 if (
                   chunkedUnknownWords[iter].length ===
@@ -274,6 +274,7 @@ export class SubtitlesSelectionFormComponent
                         if (chunkedUnknownWords.length - 1 === iter) {
                           this.unknownWords = undefined;
                           this.isSubtitleSelected = true;
+                          this.isLoading = false;
                         }
                         MaterialService.toast(
                           `${chunkedUnknownWords[iter].length} words added`
@@ -281,6 +282,7 @@ export class SubtitlesSelectionFormComponent
                         this.ankiService.cardsChanged();
                       },
                       err2 => {
+                        this.isLoading = false;
                         MaterialService.toast(err2);
                       }
                     );
@@ -299,7 +301,7 @@ export class SubtitlesSelectionFormComponent
         // bypass arrow function rest parameters and default parameters limit
         // this timeout for saving i parameter at current state
         // @ts-ignore
-        setTimeout(processChunc(i), 5000);
+        setTimeout(processChunc(i), 0);
       }
       i++;
     }

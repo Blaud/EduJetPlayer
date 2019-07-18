@@ -72,10 +72,12 @@ export class SubtitleService {
                     separatedAnkiWords = separatedAnkiWords.concat(
                       // TODO: better card template parse.
                       ankiCard.fields.Front.value
-                        .replace(/<br>/g, '')
-                        .replace(/[']/g, '')
                         .toLowerCase()
-                        .match(/.[^\W\d](\w|[-']{1,2}(?=\w))*/g)
+                        .replace(/<br>/g, '')
+                        .replace(/[.]/g, ' ')
+                        .replace(/"/g, ' ')
+                        .replace(/[']/g, '')
+                        .split(' ') // TODO: some single words getting removed by "/.[^\W\d](\w|[-']{1,2}(?=\w))*/g".
                     );
                   });
 
@@ -99,7 +101,6 @@ export class SubtitleService {
                     console.log(e);
                     resolve([]);
                   }
-
                   unknownWords = separatedSubtitleWords.filter(
                     el => !separatedAnkiWords.includes(el)
                   );
