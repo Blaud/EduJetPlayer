@@ -1,23 +1,25 @@
 <ng-container *ngIf="activeCuePoints">
   <div *ngIf="stopedOnSubtitle" class="translation-layer">
-    <a
-      *ngIf="currentTranslation"
-      class="waves-effect waves-light"
-      (click)="saveCard()"
-      #savebtn
-      ><i class="material-icons left">save</i></a
-    >
-    <select
-      *ngIf="currentTranslation"
-      class="lang-selector"
-      (change)="onLangChanged($event)"
-      #langselector
-    >
-      <option value="ru">ru</option>
-      <option value="en">en</option>
-      <option value="es">es</option>
-    </select>
-    {{ currentTranslation }}
+    <span *ngIf="currentTranslation; else loader">
+      <a
+        *ngIf="currentTranslation"
+        class="waves-effect waves-light"
+        (click)="saveCard()"
+        #savebtn
+        ><i class="material-icons left">save</i></a
+      >
+      <select
+        *ngIf="currentTranslation"
+        class="lang-selector"
+        (change)="onLangChanged($event)"
+        #langselector
+      >
+        <option value="ru">ru</option>
+        <option value="en">en</option>
+        <option value="es">es</option>
+      </select>
+      {{ currentTranslation }}
+    </span>
   </div>
   <div
     *ngFor="let cuePointData of activeCuePoints"
@@ -29,3 +31,7 @@
     {{ cuePointData?.description }}
   </div>
 </ng-container>
+
+<ng-template #loader>
+  <app-loader *ngIf="stopedOnTranslation"></app-loader>
+</ng-template>
