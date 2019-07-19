@@ -3,6 +3,7 @@ export interface User {
   email: string;
   password: string;
   lastlang?: string;
+  lastfromlang?: string;
   imageSrc?: string;
   lastDeckName?: string;
   lastModelName?: string;

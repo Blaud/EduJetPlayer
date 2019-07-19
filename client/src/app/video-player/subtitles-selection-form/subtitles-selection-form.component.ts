@@ -222,16 +222,15 @@ export class SubtitlesSelectionFormComponent
         const processChunc = iter => {
           const notes = [];
           let unknownWordsTranslations = [];
-          // TODO: get "translate from" lang from user
           const textToTranslate: TextToTranslate = {
-            from: 'en',
+            from: this.userService.currentUser.lastfromlang,
             to: this.userService.currentUser.lastlang,
             text: stringifyedChunk,
           };
           // TODO: check if anki connected first.
           this.translatorService
             .translate(textToTranslate)
-            .pipe(delay(iter * 2000))
+            .pipe(delay(iter * 100))
             .subscribe(
               translatedText => {
                 unknownWordsTranslations = translatedText.text

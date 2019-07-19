@@ -39,7 +39,7 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
       MaterialService.initializeSelect(this.langselectorref);
 
       // TODO: save tags and from lang to user object in database
-      this.fromlangselectorref.nativeElement.value = this.userService.currentUser.lastlang;
+      this.fromlangselectorref.nativeElement.value = this.userService.currentUser.lastfromlang;
       MaterialService.initializeSelect(this.fromlangselectorref);
       MaterialService.updateTextInputs();
     }
@@ -112,7 +112,8 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
     this.userService.currentUser.lastDeckName = this.decknameselectorref.nativeElement.value;
     this.userService.currentUser.lastModelName = this.modelnameselectorref.nativeElement.value;
     this.userService.currentUser.lastlang = this.langselectorref.nativeElement.value;
-    console.log(this.userService.currentUser.lastlang);
+    this.userService.currentUser.lastfromlang = this.fromlangselectorref.nativeElement.value;
+
     this.userService.updateSettings(this.userService.currentUser).subscribe(
       res => {
         MaterialService.toast('Settings Updated');

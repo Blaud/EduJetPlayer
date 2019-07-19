@@ -19,6 +19,7 @@ export class UserService {
   defaultUser: User = {
     email: '',
     password: 'secured',
+    lastfromlang: 'en',
     lastlang: 'ru',
     lastDeckName: 'Default',
     lastModelName: 'Basic',
@@ -37,6 +38,7 @@ export class UserService {
     this.currentUser.lastDeckName = user.lastDeckName;
     this.currentUser.lastModelName = user.lastModelName;
     this.currentUser.lastlang = user.lastlang;
+    this.currentUser.lastfromlang = user.lastfromlang;
     localStorage.setItem('user', JSON.stringify(this.currentUser));
     return this.http.patch<User>(`/api/user/updatesettings/${user._id}`, user);
   }
