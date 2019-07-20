@@ -3,6 +3,7 @@ const translator = require('googletranslatefree');
 
 module.exports.translate = async function(req, res) {
   try {
+    // TODO: fix translator typo rejections
     if (req.body.from) {
       await translator(req.body.from, req.body.to, req.body.text, response => {
         res.status(200).json(response);
