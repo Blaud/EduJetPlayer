@@ -12,6 +12,7 @@ import { IMediaStream, ITrack } from '../shared/interfaces';
 import { VgDASH } from 'videogular2/src/streaming/vg-dash/vg-dash';
 import { VgHLS } from 'videogular2/src/streaming/vg-hls/vg-hls';
 import { DomSanitizer } from '@angular/platform-browser';
+import { VideoLinkInputComponent } from './video-link-input/video-link-input.component';
 
 @Component({
   selector: 'app-video-player',
@@ -22,6 +23,7 @@ export class VideoPlayerComponent implements OnInit, AfterViewChecked {
   @ViewChild(VgDASH) vgDash: VgDASH;
   @ViewChild(VgHLS) vgHls: VgHLS;
   @ViewChild('subtitles') subtitles: SubtitlesComponent;
+  @ViewChild('videolinkinput') videolinkinput: VideoLinkInputComponent;
   @ViewChild('subtitlesSelectionForm')
   subtitlesSelectionForm: SubtitlesSelectionFormComponent;
   // TODO: select whole word even if part selected

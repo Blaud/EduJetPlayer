@@ -2,10 +2,12 @@
 
 <div class="row">
   <div class="col s3 center-align">
-    <app-reffered-videos></app-reffered-videos>
+    <app-reffered-videos
+      [VideoLinkInput]="videoplayer.videolinkinput"
+    ></app-reffered-videos>
   </div>
   <div class="col s6 center-align">
-    <app-video-player></app-video-player>
+    <app-video-player #videoplayer></app-video-player>
   </div>
   <div class="col s3 center-align">
     <app-last-saved-cards></app-last-saved-cards>
