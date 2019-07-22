@@ -14,7 +14,7 @@ import { VideoLinkInputComponent } from '../video-player/video-link-input/video-
 export class RefferedVideosComponent implements OnInit {
   @Input('VideoLinkInput') VideoLinkInput: VideoLinkInputComponent;
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit() {}
 

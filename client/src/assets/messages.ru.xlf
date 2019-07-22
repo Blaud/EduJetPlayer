@@ -2,28 +2,356 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="0f6b5d5319278244f075ba40cb573a8922930a95" datatype="html">
+        <source>Войти в систему</source>
+        <target>Войти в систему</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="91b96d7228b6e05c238fa4e39abfc17ad51a6eef" datatype="html">
+        <source>Email:</source>
+        <target>Email:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cf26844055825de4226590838e89d0da5de9ae96" datatype="html">
+        <source>введите почту</source>
+        <target>введите почту</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/register-page/register-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b6d07e2e8a9a2ba273105b5e22de85be0a923a1" datatype="html">
+        <source>такая почта не существует</source>
+        <target>такая почта не существует</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51cb7b6e34e4f84eff6f7579ec4195a08f0941b6" datatype="html">
+        <source>Пароль:</source>
+        <target>Пароль:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/register-page/register-page.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="457140b6585533a9c5b030129dede3cf6a786517" datatype="html">
+        <source>введите пароль</source>
+        <target>введите пароль</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/register-page/register-page.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8b534cd381f835b00af4ce29da5354a2028c6a5d" datatype="html">
+        <source>
+      Войти
+    </source>
+            <target>
+      Войти
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login-page/login-page.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e4331c5aaa6f311d9755b2a632f5cf633d094cba" datatype="html">
+        <source>На главную</source>
+        <target>На главную</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/auth-layout/auth-layout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f516f670f322709f16879defac208d1feeba672d" datatype="html">
         <source>Вход</source>
         <target>Вход</target>
         <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/auth-layout/auth-layout.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">app/shared/layouts/top-nav-layout/top-nav-layout.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9313958545203394ce206f6f0f8f70b85eaccc24" datatype="html">
-        <target>Регистрация</target>
+        <source>Регистрация</source>
         <target>Регистрация</target>
         <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/auth-layout/auth-layout.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">app/shared/layouts/top-nav-layout/top-nav-layout.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="775e952f99ba0b3ac5d95d3100b6fb84eb273038" datatype="html">
+        <source>Профиль</source>
+        <target>Профиль</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8aadb7f78707eed18b75db23fbd81c66a4de7b10" datatype="html">
+        <source>
+      На главную
+    </source>
+            <target>
+      На главную
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f9de4cc357bb009c8a876d5a98d91bffbd9a5459" datatype="html">
+        <source>Выйти</source>
+        <target>Выйти</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/profile-layout/profile-layout.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4ba83eaf2ab78f362e9d883494e100b99f515e65" datatype="html">
+        <source>Создать аккаунт</source>
+        <target>Создать аккаунт</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/register-page/register-page.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9470c3e3d0e2ab4326ba4409ed603cae6a9efe79" datatype="html">
+        <source>
+      Создать
+    </source>
+            <target>
+      Создать
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/register-page/register-page.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a76c52c3c6a69f7d02b8af6ea33a3d2c25bd2588" datatype="html">
+        <source>Открыть</source>
+        <target>Открыть</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/video-link-input/video-link-input.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e715bff6b525e5412475bf3f71dc9c4eb75a91f3" datatype="html">
+        <source>Загрузить субтитры</source>
+        <target>Загрузить субтитры</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f72c4ec5a5e779b6bd58fdaa423673fb56c36354" datatype="html">
+        <source>Выбор субтитров</source>
+        <target>Выбор субтитров</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98c77d8c4faf40f89bf6f8e1affb03225a8cae5a" datatype="html">
+        <source>
+        Загрузить неизвестные слова
+      </source>
+              <target>
+        Загрузить неизвестные слова
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d8a8ebbdb1f3b1c8398dbb03d0a0b0936db3a5a6" datatype="html">
+        <source>
+            Сохранить Ниизвестные слова в коллоду
+          </source>
+                  <target>
+            Сохранить Ниизвестные слова в коллоду
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="664ced65ca9a95850f7723155e509e887cf569fa" datatype="html">
+        <source>
+        Закрыть
+      </source>
+              <target>
+        Закрыть
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2b024df4c4e27c7db6fe83676425a366ce718836" datatype="html">
+        <source>
+    Нет доступных субтитров для этого видео
+  </source>
+          <target>
+    Нет доступных субтитров для этого видео
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5406f97f78e54fab56386ab8b5b2a6bcde06838f" datatype="html">
+        <source>
+    Не осталось неизвестных слов
+  </source>
+          <target>
+    Не осталось неизвестных слов
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/video-player/subtitles-selection-form/subtitles-selection-form.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d93d99d42784895632d64da1c32e211e54fffc4b" datatype="html">
+        <source>
+    Пока нет просмотренных видео
+  </source>
+          <target>
+    Пока нет просмотренных видео
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/reffered-videos/reffered-videos.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d43b8ba5d26721c4a3fe97094c9101aeff6f9d6a" datatype="html">
+        <source>
+    В колоде нет карт
+  </source>
+          <target>
+    В колоде нет карт
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/last-saved-cards/last-saved-cards.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b3f96d28c0852ae64a3b64b2a20713654da96e19" datatype="html">
+        <source>Выберете колоду и шаблон карт</source>
+        <target>Выберете колоду и шаблон карт</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="803106d8620141d21836be558847c8685b5bd8b5" datatype="html">
+        <source>Имя колоды:</source>
+        <target>Имя колоды:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d48fc593533bf7ec1b54670802516995caf1c80" datatype="html">
+        <source>Имя шаблона:</source>
+        <target>Имя шаблона:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="50a99cd70596264eaa140cc5c817ba872b6d0a08" datatype="html">
+        <source>Выбор языка на который переводить</source>
+        <target>Выбор языка на который переводить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be61856891ddc9c011eed882da8c247d34029345" datatype="html">
+        <source>Выбор языка с которого переводить</source>
+        <target>Выбор языка с которого переводить</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8c2dabe019a2679cb783660c39db5f88771d650" datatype="html">
+        <source>Выбор тегов (эти теги будут добавлены к сохраняемым катрочкам)</source>
+        <target>Выбор тегов (эти теги будут добавлены к сохраняемым катрочкам)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="385e30c452f83e35d1b3d3baac3990a943e954f7" datatype="html">
+        <source>
+  Сохранить
+</source>
+        <target>
+  Сохранить
+</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c16c796b2c35724de07b2c9e508c7a66696c99f7" datatype="html">
+        <source>
+    Нет данных
+  </source>
+          <target>
+    Нет данных
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/user-settings-page/user-settings-page.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d1e2b9ed5e6c01bc3ba7aa9639cf655ec80cbb3a" datatype="html">
+        <source>Locale select</source>
+        <target>Locale select</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/layouts/top-nav-layout/top-nav-layout.component.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1d1123745ba99c426b4f526707bea90be32e137e" datatype="html">
-        <target>Личный кабинет</target>
+        <source>Личный кабинет</source>
         <target>Личный кабинет</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/layouts/top-nav-layout/top-nav-layout.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
     </body>

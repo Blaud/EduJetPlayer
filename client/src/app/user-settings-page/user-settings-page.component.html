@@ -1,4 +1,4 @@
-<h4>Choose deck and model name</h4>
+<h4 i18n>Выберете колоду и шаблон карт</h4>
 <br />
 <div
   class="input-field col s12"
@@ -9,7 +9,7 @@
       {{ deck }}
     </option>
   </select>
-  <label>Deck name select</label>
+  <label i18n>Имя колоды:</label>
 </div>
 <br />
 <br />
@@ -22,7 +22,7 @@
       {{ model }}
     </option>
   </select>
-  <label>Model name select</label>
+  <label i18n>Имя шаблона:</label>
 </div>
 <br />
 <br />
@@ -35,7 +35,7 @@
     <option value="en">en</option>
     <option value="es">es</option>
   </select>
-  <label>Translate TO language select</label>
+  <label i18n>Выбор языка на который переводить</label>
 </div>
 
 <br />
@@ -50,7 +50,7 @@
     <option value="en">en</option>
     <option value="es">es</option>
   </select>
-  <label>Translate FROM language select</label>
+  <label i18n>Выбор языка с которого переводить</label>
 </div>
 
 <br />
@@ -58,13 +58,16 @@
 
 <div class="input-field col s12">
   <input type="text" placeholder="testNote" #tagselector />
-  <label>Tags Select (this tags will be added to the cards)</label>
+  <label i18n
+    >Выбор тегов (эти теги будут добавлены к сохраняемым катрочкам)</label
+  >
 </div>
 
 <button
   type="submit"
   class="modal-action btn waves-effect"
   (click)="saveUserSettings($event)"
+  i18n
 >
   Сохранить
 </button>
@@ -74,7 +77,7 @@
 </ng-template>
 
 <ng-template #empty>
-  <div class="center">
-    No items available
+  <div class="center" i18n>
+    Нет данных
   </div>
 </ng-template>

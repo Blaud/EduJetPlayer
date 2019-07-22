@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 
 declare var M;
-
+// TODO: make i18n support for tost msgs
 export interface MaterialInstance {
   open?(): void;
   close?(): void;

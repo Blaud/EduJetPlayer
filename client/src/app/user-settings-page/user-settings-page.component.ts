@@ -26,7 +26,7 @@ export class UserSettingsPageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private ankiService: AnkiService,
-    private userService: UserService
+    public userService: UserService
   ) {}
 
   ngOnInit() {

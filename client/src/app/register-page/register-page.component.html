@@ -1,24 +1,26 @@
-<form
-  class="card"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="card-content">
-    <span class="card-title">Создать аккаунт</span>
+    <span class="card-title" i18n>Создать аккаунт</span>
     <div class="input-field">
       <input
         formControlName="email"
         id="email"
         type="email"
-        [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
-      >
+        [ngClass]="{
+          invalid: form.get('email').invalid && form.get('email').touched
+        }"
+      />
       <label for="email">Email:</label>
       <span
         class="helper-text red-text"
         *ngIf="form.get('email').invalid && form.get('email').touched"
       >
-        <span *ngIf="form.get('email').errors['required']">Email is empty</span>
-        <span *ngIf="form.get('email').errors['email']">Email is invalid</span>
+        <span *ngIf="form.get('email').errors['required']" i18n
+          >введите почту</span
+        >
+        <span *ngIf="form.get('email').errors['email']"
+          >почты не существует</span
+        >
       </span>
     </div>
     <div class="input-field">
@@ -26,17 +28,31 @@
         formControlName="password"
         id="password"
         type="password"
-        [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
-      >
-      <label for="password">Пароль:</label>
+        [ngClass]="{
+          invalid: form.get('password').invalid && form.get('password').touched
+        }"
+      />
+      <label for="password" i18n>Пароль:</label>
       <span
         class="helper-text red-text"
         *ngIf="form.get('password').invalid && form.get('password').touched"
       >
-        <span *ngIf="form.get('password').errors['required']">password is empty</span>
-        <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
-        Min password is {{form.get('password').errors['minlength']['requiredLength']}} symbols.
-        Now {{form.get('password').errors['minlength']['actualLength']}} / {{form.get('password').errors['minlength']['requiredLength']}}
+        <span *ngIf="form.get('password').errors['required']" i18n
+          >введите пароль</span
+        >
+        <span
+          *ngIf="
+            form.get('password').errors['minlength'] &&
+            form.get('password').errors['minlength']['requiredLength']
+          "
+        >
+          Min password is
+          {{
+            form.get('password').errors['minlength']['requiredLength']
+          }}
+          symbols. Now
+          {{ form.get('password').errors['minlength']['actualLength'] }} /
+          {{ form.get('password').errors['minlength']['requiredLength'] }}
         </span>
       </span>
     </div>
@@ -46,8 +62,9 @@
       type="submit"
       class="modal-action btn waves-effect"
       [disabled]="form.invalid || form.disabled"
+      i18n
     >
-      Создать</button>
+      Создать
+    </button>
   </div>
 </form>
-

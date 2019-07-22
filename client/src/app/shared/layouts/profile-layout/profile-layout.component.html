@@ -1,5 +1,5 @@
 <ul class="sidenav sidenav-fixed a-sidenav">
-  <h4>Profile</h4>
+  <h4 i18n>Профиль</h4>
 
   <li class="bold" *ngFor="let link of links" routerLinkActive="active">
     <a [routerLink]="[link.url]" class="waves-effect waves-orange">
@@ -7,13 +7,13 @@
     </a>
   </li>
   <li class="bold">
-    <a routerLink="/" class="waves-effect waves-orange">
+    <a routerLink="/" class="waves-effect waves-orange" i18n>
       На главную
     </a>
   </li>
 
   <li class="bold last">
-    <a href="#" class="waves-effect waves-orange" (click)="logout($event)"
+    <a href="#" class="waves-effect waves-orange" (click)="logout($event)" i18n
       >Выйти</a
     >
   </li>

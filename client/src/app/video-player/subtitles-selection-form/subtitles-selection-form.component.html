@@ -1,10 +1,10 @@
 <form [formGroup]="form">
   <div class="modal" #modal>
     <div class="modal-content">
-      <h4 class="mb1">Load Subtitles</h4>
+      <h4 class="mb1" i18n>Загрузить субтитры</h4>
       <div class="file-field input-field">
         <div class="btn">
-          <span>Browse</span>
+          <span i18n>Открыть</span>
           <input type="file" (change)="onFileSelect($event)" />
         </div>
 
@@ -27,7 +27,7 @@
             {{ subtitle }}
           </option>
         </select>
-        <label>Subtitles select</label>
+        <label i18n>Выбор субтитров</label>
       </div>
     </div>
     <span *ngIf="!isLoading; else loader">
@@ -44,6 +44,7 @@
         *ngIf="isSubtitleSelected"
         class="modal-action btn waves-effect"
         (click)="onShowUnknownBtnClick()"
+        i18n
       >
         Загрузить неизвестные слова
       </button>
@@ -54,6 +55,7 @@
             type="submit"
             class="modal-action btn waves-effect"
             (click)="onSaveUnknownWordsBtnClick()"
+            i18n
           >
             Сохранить Ниизвестные слова в коллоду
           </button>
@@ -64,6 +66,7 @@
         type="button"
         (click)="onModalClose()"
         class="modal-action waves-effect waves-black btn-flat"
+        i18n
       >
         Закрыть
       </button>
@@ -76,13 +79,13 @@
 </ng-template>
 
 <ng-template #empty>
-  <div class="center">
-    No subs available
+  <div class="center" i18n>
+    Нет доступных субтитров для этого видео
   </div>
 </ng-template>
 
 <ng-template #empty2>
-  <div class="center">
-    No unknown words
+  <div class="center" i18n>
+    Не осталось неизвестных слов
   </div>
 </ng-template>
