@@ -43,7 +43,7 @@
     "express": "^4.17.1",
     "googletranslatefree": "github:Blaud/GoogleTranslateFree",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "mongoose": "^5.6.5",
     "morgan": "^1.9.0",
     "multer": "^1.4.2",
