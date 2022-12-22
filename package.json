@@ -42,7 +42,7 @@
     "cors": "^2.8.4",
     "express": "^4.17.1",
     "googletranslatefree": "github:Blaud/GoogleTranslateFree",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.22.2",
     "mongoose": "^5.6.5",
     "morgan": "^1.9.0",
